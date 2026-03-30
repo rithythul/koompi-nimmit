@@ -1,0 +1,25 @@
+{
+  "primary": "zai/glm-5-turbo",
+  "fallback": "github-copilot/gpt-5.3-codex",
+  "coding": {
+    "default": "github-copilot/claude-opus-4.6",
+    "simple": "github-copilot/gpt-5.3-codex",
+    "complex": "claude-code"
+  },
+  "image": {
+    "analysis": "google/gemini-3.1-pro",
+    "generation": "openai/dall-e-3"
+  },
+  "voice": "google/gemini-3.1-pro",
+  "embedding": "text-embedding-3-small",
+  "routing": {
+    "description": "zai/glm-5-turbo handles most tasks. Coding tasks route to Copilot sub-agents. Complex multi-file tasks escalate to Claude Code via ACP.",
+    "rules": [
+      { "condition": "task requires coding", "model": "github-copilot/claude-opus-4.6" },
+      { "condition": "simple script or config", "model": "github-copilot/gpt-5.3-codex" },
+      { "condition": "multi-file refactor or architecture", "model": "claude-code" },
+      { "condition": "image analysis", "model": "google/gemini-3.1-pro" },
+      { "condition": "default / everything else", "model": "zai/glm-5-turbo" }
+    ]
+  }
+}

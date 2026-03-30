@@ -1,0 +1,74 @@
+{
+  "meta": {
+    "lastTouchedVersion": "1.0.0",
+    "lastTouchedAt": "{{TIMESTAMP_ISO}}"
+  },
+  "agents": {
+    "defaults": {
+      "model": {
+        "primary": "zai/glm-5-turbo",
+        "fallback": "github-copilot/gpt-5.3-codex"
+      },
+      "imageModel": "google/gemini-3.1-pro",
+      "imageGenerationModel": {
+        "primary": "openai/dall-e-3"
+      }
+    },
+    "list": [
+      {
+        "id": "main",
+        "default": true,
+        "workspace": "{{BRAIN_DIR}}",
+        "identity": {
+          "name": "{{AGENT_NAME}}",
+          "emoji": "🦅"
+        },
+        "tools": {
+          "profile": "full"
+        }
+      }
+    ]
+  },
+  "tools": {
+    "profile": "full",
+    "allowed": ["*"]
+  },
+  "channels": {
+    "telegram": {
+      "enabled": {{CHANNEL_TELEGRAM}},
+      "botToken": "{{BOT_TOKEN}}",
+      "allowFrom": {{ALLOWED_IDS}},
+      "groupPolicy": "allowlist",
+      "features": {
+        "inlineButtons": true,
+        "reactions": "minimal",
+        "voiceMessages": true
+      }
+    },
+    "discord": {
+      "enabled": {{CHANNEL_DISCORD}},
+      "token": "",
+      "allowFrom": ["*"],
+      "groupPolicy": "open"
+    }
+  },
+  "browser": {
+    "enabled": true,
+    "headless": true,
+    "display": ":99",
+    "browserType": "chromium"
+  },
+  "memory": {
+    "enabled": true,
+    "mode": "file",
+    "path": "{{BRAIN_DIR}}/memory"
+  },
+  "mcp": {
+    "servers": {}
+  },
+  "gateway": {
+    "port": 18789,
+    "mode": "local",
+    "bind": "loopback"
+  }
+}
