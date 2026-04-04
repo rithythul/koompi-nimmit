@@ -5,7 +5,7 @@ set -euo pipefail
 # One-command setup on fresh Ubuntu 22.04+ VPS or KOOMPI Mini (Arch)
 # Usage: bash install.sh "ClientName" --token "BOT_TOKEN" --zai-key "ZAI_KEY"
 
-VERSION="2.0.0"
+VERSION="2.1.0"
 INSTALL_DIR="$HOME/.openclaw/nimmit"
 BRAIN_DIR="$INSTALL_DIR"
 CONFIG_FILE="$INSTALL_DIR/openclaw.json"
@@ -31,6 +31,7 @@ CLAUDE_CODE_TOKEN=""
 CHANNEL="telegram"
 SKIP_DEPS=false
 IS_MINI=false
+DIVISIONS=false
 
 while [[ $# -gt 0 ]]; do
     case $1 in
@@ -43,6 +44,7 @@ while [[ $# -gt 0 ]]; do
         --channel) CHANNEL="$2"; shift 2 ;;
         --skip-deps) SKIP_DEPS=true; shift ;;
         --mini) IS_MINI=true; shift ;;
+        --divisions) DIVISIONS=true; shift ;;
         -h|--help)
             cat <<HELP
 Usage: bash install.sh [OPTIONS] CLIENT_NAME
@@ -61,6 +63,7 @@ Options:
   --channel CHANNEL        Primary channel: telegram|discord (default: telegram)
   --skip-deps              Skip system dependency installation
   --mini                   Target is KOOMPI Mini (enables autologin)
+  --divisions             Enable 4-division mode (build, product, growth, ops)
   -h, --help               Show this help
 
 Examples:
@@ -335,8 +338,29 @@ MINIMAL
 _This file is yours to evolve._
 IDENTITY
 
-    # AGENTS.md (minimal for client)
-    cat > "$BRAIN_DIR/AGENTS.md" <<AGENTS
+    # AGENTS.md — use division template if --divisions, else minimal
+    if [[ "$DIVISIONS" == true && -f "$INSTALL_DIR/config/AGENTS.template.md" ]]; then
+        sed -e "s/{{AGENT_NAME}}/${AGENT_NAME}/g" \
+            -e "s/{{ORG_NAME}}/${ORG_NAME}/g" \
+            -e "s/{{BRAIN_DIR}}/${BRAIN_DIR}/g" \
+            "$INSTALL_DIR/config/AGENTS.template.md" > "$BRAIN_DIR/AGENTS.md"
+        ok "AGENTS.md generated (division mode)"
+
+        # Copy division SOUL.md files
+        mkdir -p "$BRAIN_DIR/topics"
+        for div in build product growth ops; do
+            if [[ -f "$INSTALL_DIR/config/divisions/$div/SOUL.md" ]]; then
+                mkdir -p "$BRAIN_DIR/topics/$div"
+                sed -e "s/{{AGENT_NAME}}/${AGENT_NAME}/g" \
+                    -e "s/{{ORG_NAME}}/${ORG_NAME}/g" \
+                    "$INSTALL_DIR/config/divisions/$div/SOUL.md" > "$BRAIN_DIR/topics/$div/SOUL.md"
+            fi
+        done
+        ok "4 divisions configured: build, product, growth, ops"
+        info "Create topics/threads for #build, #product, #growth, #ops in your messaging app"
+        info "Update AGENTS.md thread IDs after creating the topics"
+    else
+        cat > "$BRAIN_DIR/AGENTS.md" <<AGENTS
 # AGENTS.md — ${AGENT_NAME}
 
 ## Who We Are
@@ -354,8 +378,7 @@ We are **${AGENT_NAME}** — ${ORG_NAME}'s AI team.
 
 1. Read SOUL.md + TOOLS.md + STANDARDS.md
 2. Read IDENTITY.md
-3. Check task queue: run \`nimmit-queue task list\`
-4. For coding tasks: read skills/webapp/skill.md
+3. Check task queue
 
 ## Coding
 
@@ -363,6 +386,8 @@ We are **${AGENT_NAME}** — ${ORG_NAME}'s AI team.
 - Claude Code (ACP): only for complex multi-file tasks
 - Always TypeScript strict. Never plain JS.
 AGENTS
+        ok "AGENTS.md generated (single mode)"
+    fi
 
     # MEMORY.md (minimal index)
     cat > "$BRAIN_DIR/MEMORY.md" <<MEMORY
