@@ -69,4 +69,4 @@ koompi-nimmit/
 
 ## License
 
-Proprietary — KOOMPI
+Apache License 2.0 — see [LICENSE](LICENSE)
