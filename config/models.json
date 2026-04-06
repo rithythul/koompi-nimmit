@@ -1,13 +1,16 @@
 {
-  "primary": "zai/glm-5-turbo",
-  "fallback": "github-copilot/gpt-5.3-codex",
+  "primary": "google/gemini-3.1-pro-preview",
+  "fallbacks": [
+    "google/gemini-3-flash-preview",
+    "github-copilot/claude-sonnet-4.6"
+  ],
   "coding": {
     "default": "github-copilot/claude-opus-4.6",
-    "simple": "github-copilot/gpt-5.3-codex",
-    "complex": "claude-code"
+    "simple": "github-copilot/gpt-5.4",
+    "complex": "claude-code-acp"
   },
   "image": {
-    "analysis": "google/gemini-3.1-pro",
+    "analysis": "google/gemini-3.1-pro-preview",
     "generation": "google/gemini-3.1-flash-image-preview",
     "studio": "google/gemini-3-pro-image-preview"
   },
@@ -20,20 +23,18 @@
     "full": "google/lyria-3-pro",
     "clip": "google/lyria-3-clip"
   },
-  "deep_research": "google/gemini-3.1-pro",
-  "embedding": "text-embedding-3-small",
+  "deep_research": "google/gemini-3.1-pro-preview",
   "routing": {
-    "description": "GLM-5 Turbo handles most tasks. Coding routes to Copilot sub-agents. Complex multi-file tasks escalate to Claude Code via ACP.",
+    "description": "Gemini 3.1 Pro handles chat. Coding routes to Copilot sub-agents. Complex multi-file tasks escalate to Claude Code via ACP. Models are swappable at runtime — identity stays constant.",
     "rules": [
+      { "condition": "default chat", "model": "google/gemini-3.1-pro-preview" },
       { "condition": "task requires coding", "model": "github-copilot/claude-opus-4.6" },
-      { "condition": "simple script or config", "model": "github-copilot/gpt-5.3-codex" },
-      { "condition": "multi-file refactor or architecture", "model": "claude-code" },
-      { "condition": "image analysis", "model": "google/gemini-3.1-pro" },
+      { "condition": "simple script or config", "model": "github-copilot/gpt-5.4" },
+      { "condition": "multi-file refactor or architecture", "model": "claude-code-acp" },
       { "condition": "image generation (standard)", "model": "google/gemini-3.1-flash-image-preview" },
       { "condition": "image generation (studio quality)", "model": "google/gemini-3-pro-image-preview" },
-      { "condition": "deep research", "model": "google/gemini-3.1-pro" },
-      { "condition": "video generation", "model": "google/veo-3.1" },
-      { "condition": "default / everything else", "model": "zai/glm-5-turbo" }
+      { "condition": "deep research", "model": "google/gemini-3.1-pro-preview" },
+      { "condition": "video generation", "model": "google/veo-3.1" }
     ]
   }
 }

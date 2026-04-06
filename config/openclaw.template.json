@@ -1,6 +1,6 @@
 {
   "meta": {
-    "lastTouchedVersion": "2.0.0"
+    "lastTouchedVersion": "3.0.0"
   },
   "browser": {
     "enabled": true,
@@ -11,14 +11,14 @@
   "agents": {
     "defaults": {
       "model": {
-        "primary": "zai/glm-5-turbo",
+        "primary": "google/gemini-3.1-pro-preview",
         "fallbacks": [
-          "github-copilot/gpt-5.3-codex",
-          "google/gemini-3.1-pro"
+          "google/gemini-3-flash-preview",
+          "github-copilot/claude-sonnet-4.6"
         ]
       },
       "imageModel": {
-        "primary": "google/gemini-3.1-flash-lite-preview"
+        "primary": "google/gemini-3.1-flash-image-preview"
       },
       "memorySearch": {
         "provider": "local"
@@ -38,7 +38,7 @@
         "workspace": "{{BRAIN_DIR}}",
         "identity": {
           "name": "{{AGENT_NAME}}",
-          "emoji": "🦅"
+          "emoji": "🧠"
         },
         "subagents": {
           "allowAgents": ["*"]
