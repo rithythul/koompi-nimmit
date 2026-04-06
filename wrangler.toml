@@ -1,0 +1,9 @@
+name = "nimmit-installer"
+main = "worker/index.js"
+compatibility_date = "2024-01-01"
+
+[triggers]
+routes = []
+
+# Custom domain configured in Cloudflare dashboard:
+# nimmit.koompi.ai → this worker
