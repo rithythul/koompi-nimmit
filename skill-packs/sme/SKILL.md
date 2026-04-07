@@ -1,95 +1,109 @@
 ---
 name: nimmit-sme
-description: Use for Cambodian SME operations — social media content, customer service, inventory tracking, marketing campaigns, financial reports, and staff management in everyday Khmer.
+description: Use for small and medium business operations — social media content, customer service, inventory tracking, marketing campaigns, financial reports, and staff management.
 ---
 
-# Cambodian SME Skill
+# Small & Medium Business Skill
 
-Assist Cambodian small and medium businesses with daily operations. Use everyday Khmer (ភាសាថ្មី) — friendly but professional, matching how businesses actually communicate in Cambodia.
+Assist small and medium businesses with daily operations — sales, customer service, inventory, marketing, social media, and staff coordination. Keep everything practical. SME owners need clarity, not complexity.
+
+## Heartbeat
+
+When activated during a heartbeat cycle:
+
+1. **Low-stock items?** Flag anything below reorder threshold
+2. **Unanswered customer messages?** Draft response suggestions for any unread inquiries
+3. **Social media schedule?** Any posts due today or tomorrow without drafts → prepare them
+4. **Sales report due?** If daily/weekly close is approaching → compile numbers
+5. **Campaign metrics?** Active campaigns → pull performance snapshot
+6. If nothing needs attention → `HEARTBEAT_OK`
 
 ## Social Media Content
 
-**Facebook (primary platform in Cambodia):**
-- Posts: 2-4 sentences max, emoji-light (1-2 per post), clear CTA
-- Formats: product showcase, promotion, behind-the-scenes, customer testimonial, tips/advice
-- Best posting times: 7-8am, 11:30am-1pm, 7-9pm
-- Hashtags: 2-3 relevant Khmer hashtags (e.g., #ការងារកម្ពុជា #ផលិតផលខ្មែរ)
+### Facebook
+- Posts: 2-4 sentences max, 1-2 emoji, clear CTA
+- Formats: product showcase, promotion, behind-the-scenes, customer testimonial, tips
+- Best practices: post when your audience is online, test different times, track engagement
 
-**TikTok:**
+### TikTok / Short Video
 - Captions: short, punchy, 1-2 lines
-- Hook in first 3 seconds concept (plan the video structure)
+- Hook in first 3 seconds — plan the video structure before shooting
 - Trending audio suggestions based on content type
 
-**Instagram:**
-- Less common for SMEs but growing among cafes, fashion, lifestyle brands
+### Instagram
 - Visual-first captions, minimal text
+- Stories for daily engagement, posts for catalog/showcase
+
+### Content Calendar
+Plan weekly: what platform, what format, what message. Batch content creation.
 
 ## Customer Service
 
-Response templates (Khmer everyday register):
-- **Greeting:** សួស្តី! អរគុណដែលបានទាក់ទងមកកាន់យើងខ្ញុំ។
-- **Order inquiry:** សូមបញ្ជាក់បញ្ជីទំនិញដែលលោកអ្នកចង់ការបញ្ជាទិញ...
-- **Delay apology:** សូមអភ័យទោសពីការពន្យារពេលប្រឹងប្រែងបញ្ជូនបន្តក្នុងពេលឆាប់ឆ្លាតដាល
-- **Complaint:** យើងខ្ញុំសូមអភ័យទោសបានដើម្បីបញ្ហានេះហើយកំពុងដោះស្រាយដែលផ្អែកលើ...
-- **Follow-up:** តើលោកអ្នកពេញចិត្តនឹងទំនិញដែលបានទទួលហើយឬនៅ?
+Response principles:
+- **Always acknowledge first**, then solve
+- Never defensive — even when the customer is wrong
+- Fast response > perfect response
+- Follow up after resolution
 
-Tone: helpful, never defensive, always acknowledge before solving.
+Response templates:
+- **Greeting:** Friendly, thank them for reaching out
+- **Order inquiry:** Confirm details, give timeline
+- **Delay:** Apologize, give realistic new timeline, offer remedy if possible
+- **Complaint:** Acknowledge, take ownership, state next steps
+- **Follow-up:** Check satisfaction after resolution
 
-## Sales & Inventory Tracking
+## Sales & Inventory
 
 Daily report structure:
 ```
-ថ្ងៃ: [date]
-លក់: [items sold, total $]
-ទិញ: [restocked items, cost $]
-ចំណូលសុពល: [revenue - cost]
-ស្តុកនៅសល់: [key items with low stock flagged]
+Date: [date]
+Sold: [items, total revenue]
+Restocked: [items, cost]
+Gross margin: [revenue - cost]
+Low stock: [items below threshold]
 ```
 
 Weekly summary: revenue vs last week, top sellers, items needing reorder, slow movers to discount.
 
-## Marketing Campaign
+Set reorder thresholds per item. When stock hits threshold → alert.
 
-Campaign planning template:
-1. **គោលដៅ (Objective):** What specific result? (e.g., 50 orders, 1000 page views)
-2. **ប្រជាជន (Target audience):** Who? Age, location, interests
-3. **សារ (Message):** Core message in 1 sentence Khmer
-4. **ឆានែល (Channel):** Facebook / TikTok / in-store / both
-5. **រយៈពេល (Timeline):** Start → end dates
-6. **ថវិកា (Budget):** Ad spend + content creation + discounts
-7. **វិធានការដឹង (Metrics):** How to measure success
-8. **តារាងបញ្ជាទិញ (Content calendar):** What posts when
+## Marketing Campaigns
+
+Campaign planning:
+1. **Objective:** What specific result? (e.g., 50 orders, 1000 page views)
+2. **Target audience:** Who? Age, location, interests
+3. **Core message:** 1 sentence
+4. **Channel:** Social media / in-store / email / all
+5. **Timeline:** Start → end dates
+6. **Budget:** Ad spend + content creation + discounts
+7. **Success metrics:** How to measure
+8. **Content calendar:** What posts when
+
+Track: impressions, clicks, conversions, cost per acquisition. Compare against objective.
 
 ## Financial Reports
 
 Monthly business summary:
-- ចំណូលសរុប (total revenue)
-- ចំណាយសរុប (total expenses by category: rent, staff, inventory, utilities, marketing)
-- ប្រាក់ចំណូលសុពល (net profit)
-- ប្រាក់ក្នុងដៃ (cash on hand)
-- ទំនិញលក់ដាច់ជាងគេ (top products by revenue)
-- បញ្ហាទូទៅ (issues: late payments, stockouts, etc.)
+- Total revenue
+- Total expenses by category (rent, staff, inventory, utilities, marketing)
+- Net profit
+- Cash on hand
+- Top products by revenue
+- Issues (late payments, stockouts, unexpected costs)
 
-Keep it simple — SME owners need clarity, not complexity.
+Format for readability — bullet points, not paragraphs. Flag anything unusual.
 
 ## Staff Management
 
-**Schedules:** Weekly shift schedule with names, roles, hours. Flag conflicts or gaps.
+**Schedules:** Weekly shift schedule — names, roles, hours. Flag conflicts or gaps.
 
-**Announcements:** 
+**Announcements:**
 - Schedule changes: date + what changed + what to do
-- New policies: why it's changing + what it means for them
-- Celebrations: birthdays, work anniversaries, milestones
+- New policies: why + what it means for them
+- Celebrations: birthdays, milestones
 
-**Leave tracking:** Record sick leave, annual leave, unpaid leave. Alert when approaching limit.
+**Leave tracking:** Record sick, annual, unpaid leave. Alert when approaching limit.
 
-## Khmer Business Language
+## Communication Tone
 
-Common business terms:
-- លក់ / ទិញ / ចំណូល / ចំណាយ (sell / buy / income / expense)
-- ប្រាក់កក់ / ប្រាក់ទូទាត់ (deposit / payment)
-- បញ្ជីទំនិញ / ស្តុក (product list / stock)
-- មន្រ្តី / អតិថិជន / អ្នកផ្គត់ផ្គង់ (staff / customer / supplier)
-- ហាង / សាខា / ឃ្លាំង (shop / branch / warehouse)
-- លក់ដាច់ / កាត់បន្ថយលក់ (sold out / discount)
-- ទឹកប្រាក់ / ប្រាក់វិធី (cash / online payment)
+Match the business's voice. Default to: friendly, professional, direct. No corporate jargon for small businesses. Write like a real person running a real shop.

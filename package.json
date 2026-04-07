@@ -1,11 +1,7 @@
 {
-  "name": "nimmit-setup",
+  "name": "koompi-nimmit",
   "version": "1.0.0",
-  "type": "module",
-  "scripts": {
-    "setup": "bun run onboarding/nimmit-setup.ts"
-  },
-  "dependencies": {
-    "@inquirer/prompts": "^7.0.0"
-  }
+  "private": true,
+  "license": "Apache-2.0",
+  "description": "Skill packs and installer for Nimmit — an OpenClaw-powered AI assistant"
 }

@@ -1,77 +1,86 @@
 ---
 name: nimmit-government
-description: Use for Cambodian government ministry workflows — formal documents, meeting minutes, reporting, procurement, and inter-ministry communication in រដាធិកម្ម (formal register) Khmer.
+description: Use for government and public sector workflows — formal documents, meeting minutes, reporting, procurement, compliance, and inter-department communication.
 ---
 
-# Cambodian Government Skill
+# Government & Public Sector Skill
 
-Assist Cambodian government ministries with document processing, meeting management, reporting, and inter-ministry communication. Use រដាធិកម្ម (formal register) Khmer for official documents.
+Assist government ministries, departments, and public institutions with document processing, meeting management, reporting, and inter-department communication.
 
-## Khmer Register Guide
+## Heartbeat
 
-**រដាធិកម្ម (formal):** Official documents, memos, reports to superiors, ministry letters
-- គោរព = មានអាណត្តិ (have instead of មាន), លោក = ឯកឧត្តម (Minister), លោកឧបសេនី = អភិបាល (Governor)
-- Sentence endings: ...ហេតុផលនេះដោយហេតុសារ័យថា...
-- Avoid colloquial particles (ហ្នឹង, ម៉ាណ, ទៅវិញ)
-- Use full titles and honorifics always
+When activated during a heartbeat cycle:
 
-**ភាសាថ្មី (everyday):** Internal team communication, notes, informal briefings
-- Use with staff you know personally, in private channels
-
-When unsure, default to formal. It's better to be slightly over-formal than under-formal with government.
+1. **Report deadlines approaching?** Weekly/monthly/quarterly reports due in next 3 days → start drafting
+2. **Overdue document requests?** Flag any pending approvals or responses past deadline
+3. **Meetings in next 48h?** Prepare briefing docs for any without prep materials
+4. **Pending procurement items?** Check status, flag bottlenecks
+5. **Compliance deadlines?** Filing dates, audit requirements, regulatory submissions
+6. If nothing needs attention → `HEARTBEAT_OK`
 
 ## Document Types
 
-### សេចក្តីណែនាំ (Memo/Directive)
+### Memos / Directives
 Structure:
-1. រដ្ឋាភិបាលកម្ពុជា (header)
-2. ក្រសួង / ស្ថាប័ន (ministry/institution)
-3. លេខ ...ចុះថ្ងៃទី...ខែ...ឆ្នាំ...
-4. ប្រធានបទ (subject)
-5. សេចក្តីពិនិត្យ / យល់ឃើញ (review/opinion)
-6. សេចក្តីសំណូមពរ / សំណើ (request/recommendation)
-7. ហត្ថលេខា និងត្រា (signature and stamp)
+1. Organization header
+2. Department / institution
+3. Reference number and date
+4. Subject
+5. Review / background
+6. Request / recommendation
+7. Signature block
 
-### របាយការណ៍ (Report)
-- ប្រចាំសប្តាហ៍ (weekly): accomplishments, issues, next week priorities
-- ប្រចាំខែ (monthly): KPIs, budget status, milestones, risks
-- ប្រចាំត្រីមាស (quarterly): performance review, strategic updates, resource needs
-- ប្រចាំឆ្នាំ (annual): comprehensive review, next year plan, budget request
+Tone: formal register. Use proper titles and honorifics. Avoid colloquial language in official documents.
 
-### សេចក្តីសំបត្តិ (Meeting Minutes)
-Structure: date/time/location, attendees with titles, agenda items, discussion summary per item, decisions made (ការសម្រេច), action items with owners and deadlines.
+### Reports
+- **Weekly:** Accomplishments, issues, next week priorities
+- **Monthly:** KPIs, budget status, milestones, risks
+- **Quarterly:** Performance review, strategic updates, resource needs
+- **Annual:** Comprehensive review, next year plan, budget request
+
+When drafting: lead with outcomes, not activities. "Achieved X" not "Worked on X."
+
+### Meeting Minutes
+Structure: date/time/location → attendees with titles → agenda items → discussion per item → decisions made → action items with owners and deadlines.
+
+Keep minutes factual. Record what was decided, not everything that was said.
 
 ## Meeting Preparation
 
-For ministerial or inter-ministry meetings:
-1. Briefing document 1 page max — key talking points, data needed, potential questions
-2. Background context — relevant prior decisions, current status
-3. Position/perspective — what is our ministry's stance
-4. Anticipated counterpoints from other ministries
-5. Decision items — what needs approval
+For inter-department or ministerial meetings:
+1. **Briefing doc** (1 page max): key talking points, data needed, potential questions
+2. **Background:** prior decisions, current status
+3. **Position:** what is our department's stance
+4. **Anticipated counterpoints** from other departments
+5. **Decision items:** what needs approval
 
-## Reporting Templates
+## Reporting
 
-Weekly summary structure (Khmer):
-- កិច្ចការដែលបានអនុវត្ត (completed work)
-- បញ្ហាដែលព្រួយបារម្ភ (issues/concerns)
-- កិច្ចការសប្តាហ៍ក្រោយ (next week priorities)
-- ចំណូលចិត្តដំណឹង (items requiring approval)
+Weekly summary structure:
+- Completed work
+- Issues / concerns
+- Next week priorities
+- Items requiring approval
 
-Monthly KPI tracking: define metrics per ministry function, track against targets, flag deviations >10%.
+Monthly KPI tracking: define metrics per function, track against targets, flag deviations >10%.
 
 ## Procurement Workflow
 
-Key stages: សេចក្តីសុំផ្តល់ថែមទឹកប្រាក់ → គណៈកម្មាធិការស្វែងរក (bidding committee) → ដំណើរការផ្តល់ថែមទឹកប្រាក់ → ការសម្រេច → កិច្ចសន្យា
+Track these stages: requirement → approval → bidding/selection → evaluation → contract → delivery → payment
 
-When assisting: track deadlines, prepare comparison matrices, flag compliance issues, generate status reports.
+When assisting: track deadlines, prepare comparison matrices, flag compliance issues, generate status reports. Never skip required approvals.
 
-## Inter-Ministry Communication
+## Inter-Department Communication
 
-Key ministries you may reference:
-- ក្រសួងអប់រំយុវជន អភិវឌ្ឍន៍កុមារធ្យាយាង (MoEYS)
-- ក្រសួងឧស្សាហកម្ម វិទ្យាសាស្ត្រ និងបច្ចេកវិទ្យា (MISTI)
-- ក្រសួងសេដ្ឋកិច្ច និងហិរញ្ញវត្តិ (MoEF)
-- ក្រសួងប្រៃសណីយ៌កម្ម និងទូរគមនាគមន៍ (MPTC)
+- Use formal register for official correspondence
+- Reference prior correspondence by number/date
+- Include clear action requests with deadlines
+- CC relevant departments
+- Maintain a correspondence log
 
-Letters between ministries: use formal register, reference prior correspondence, include clear action requests with deadlines, carbon copy relevant departments.
+## Compliance
+
+- Track regulatory deadlines and filing requirements
+- Flag upcoming audits and prepare documentation
+- Maintain document versioning — never overwrite, always append
+- Archive decisions with date, participants, and rationale

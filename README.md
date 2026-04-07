@@ -1,25 +1,20 @@
-# Nimmit — Your AI Chief of Staff
+# Nimmit
 
-> One install. One AI worker. Every leader deserves one.
+> Install an AI worker. Teach it your job. Let it work.
 
 Built on [OpenClaw](https://github.com/openclaw/openclaw). Shipped by KOOMPI.
 
-## The Product
+## What Nimmit Does
 
-Nimmit isn't a chatbot. It's an **AI worker** you hire for your organization:
+Nimmit is an **AI worker that runs 24/7** on your machine. It doesn't wait to be asked. It wakes up, checks what needs doing, and does it.
 
-- **For the Minister** — morning briefing at 7 AM, overnight intelligence, decision support, report drafting. Know what matters before you walk into the office.
-- **For the CEO** — metrics that matter, risks to flag, suggested actions. Never be surprised by something you should have known.
-- **For the school director** — student alerts, exam prep, parent communication, teacher schedules. Run the school without drowning in admin.
-- **For the shop owner** — social media, customer responses, inventory alerts, daily sales reports. Your business, always on top of it.
+- **Remembers everything** — your org, your preferences, your history. Gets sharper over time.
+- **Works on its own** — proactive heartbeat checks tasks, deadlines, and inboxes without being prompted.
+- **Executes, not just advises** — drafts the document, replies to the customer, prepares the report, updates the spreadsheet.
+- **Talks to you where you are** — Telegram, terminal, or any channel OpenClaw supports.
+- **Learns any domain** — install a skill pack or teach it yourself. School, factory, law firm, farm, clinic — the domain doesn't matter.
 
-## How It Works
-
-```
-Install Nimmit → Choose your role → Get your AI chief of staff
-```
-
-One command. Five minutes. Running as a service.
+This isn't a chatbot. It's a team member that never sleeps.
 
 ## Install
 
@@ -27,67 +22,64 @@ One command. Five minutes. Running as a service.
 curl -fsSL https://nimmit.koompi.ai/install | bash
 ```
 
-Or for development:
-```bash
-bun run onboarding/nimmit-setup.ts
-```
+One command. Five minutes. Running as a service.
 
 ## Skill Packs
 
-| Pack | Who It's For | What It Does |
-|------|-------------|-------------|
-| 👔 **Executive** | Ministers, CEOs, C-level, leaders | Morning briefings, decision support, info gathering, report drafting, weekly reviews |
-| 🏫 **Education** | School directors, principals | Lesson planning (MoEYS), student management, exams, Khmer content, parent comms |
-| 🏛️ **Government** | Ministry staff, departments | Formal documents (រដាធិកម្ម), meeting minutes, reporting, procurement |
-| 🏪 **SME** | Business owners, managers | Social media, customer service, inventory, marketing, financials |
+Skill packs give Nimmit domain knowledge on day one. They're **starter kits, not limits** — Nimmit can learn any domain you teach it.
 
-## The Morning Briefing
+| Pack | Domain | What Nimmit Can Do |
+|------|--------|-------------------|
+| 👔 **Executive** | Leadership, C-suite | Morning briefings, decision support, report drafting, overnight intelligence, weekly reviews |
+| 🏫 **Education** | Schools, universities | Scheduling, curriculum planning, attendance tracking, parent communication, content generation |
+| 🏛️ **Government** | Ministries, departments | Formal documents, meeting prep, procurement tracking, compliance, inter-department communication |
+| 🏪 **SME** | Any business | Social media, customer service, inventory alerts, marketing campaigns, financial reports |
 
-Every Nimmit instance generates a **daily morning briefing**:
+Don't see your domain? Nimmit works without a skill pack. Or write your own — it's a single markdown file.
 
-- 🔥 Today's priorities (top 3, with what decisions are needed)
-- 📬 What happened overnight (only what matters)
-- 📊 Key metrics and changes
-- ⚠️ Risks and blockers
-- 💡 Suggested actions
-- 📅 What's coming in the next 3 days
+## How It Works
 
-The leader wakes up informed. Not overwhelmed. Ready to lead.
+```
+You install Nimmit
+    → OpenClaw seeds the brain (SOUL.md, IDENTITY.md, HEARTBEAT.md, AGENTS.md)
+    → You pick a skill pack (domain knowledge + proactive behavior)
+    → Nimmit gets a heartbeat (wakes up, checks what needs doing, does it)
+    → It works — every day, on its own
+```
+
+**The morning briefing** is just the standup. Nimmit's real work happens all day:
+
+- Picks up tasks and completes them
+- Responds to messages on your behalf
+- Drafts documents in the right tone and language
+- Flags what needs your attention — ignores what doesn't
+- Remembers decisions and builds institutional memory
 
 ## Tech Stack
 
-- **Runtime:** OpenClaw (open-source AI gateway)
-- **Brain:** Workspace (SOUL.md, IDENTITY.md, MEMORY.md, skills)
-- **Skills:** Modular domain packs (education, government, sme, executive)
-- **Install:** Bash (one command), TypeScript (interactive)
+- **Runtime:** [OpenClaw](https://github.com/openclaw/openclaw) — open-source AI gateway
+- **Brain:** Markdown workspace — seeded by OpenClaw's built-in templates
+- **Skills:** Modular domain packs with Heartbeat behavior — or bring your own
+- **Channels:** Telegram, terminal, extensible
 - **Service:** systemd (auto-start, auto-restart)
-- **Hardware:** KOOMPI Mini (perfect fit), any Linux machine
-
-## Deployment
-
-```bash
-# On a fresh KOOMPI Mini:
-bash install.sh
-
-# Answers: org name → role → language → Telegram token
-# Result: Nimmit running as a service, morning briefings ready
-```
+- **Hardware:** Any Linux machine, including KOOMPI Mini
 
 ## Structure
 
 ```
-nimmit-product/
+koompi-nimmit/
 ├── install.sh              # One-command installer
-├── onboarding/
-│   └── nimmit-setup.ts     # Interactive CLI setup
 ├── skill-packs/
-│   ├── executive/SKILL.md  # AI Chief of Staff
-│   ├── education/SKILL.md  # School operations
-│   ├── government/SKILL.md # Government workflows
-│   └── sme/SKILL.md        # Business operations
+│   ├── executive/SKILL.md  # Leadership + C-suite
+│   ├── education/SKILL.md  # Schools + universities
+│   ├── government/SKILL.md # Ministries + departments
+│   └── sme/SKILL.md        # Small & medium businesses
+├── worker/                 # Cloudflare Worker (nimmit.koompi.ai)
+│   ├── src/index.ts
+│   └── wrangler.toml
 └── README.md
 ```
 
 ## License
 
-Proprietary — KOOMPI / SmallWorld
+Apache 2.0 — same as OpenClaw.
