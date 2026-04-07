@@ -1,6 +1,14 @@
 ---
-name: nimmit-creative
+name: creative
 description: Use for creative agencies, design studios, and content teams — project management, client communication, creative briefs, review workflows, content calendars, asset management, copywriting, freelancer coordination, and budget tracking.
+version: "0.1.0"
+author: koompi
+tags:
+  - creative
+  - agency
+  - content
+  - project-management
+  - client-briefs
 ---
 
 # Creative Agency Operations

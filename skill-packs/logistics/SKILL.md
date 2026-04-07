@@ -1,7 +1,15 @@
 ```skill
 ---
-name: logistics-ops
+name: logistics
 description: Logistics and supply chain operations — shipment tracking, warehouse management, route optimization, carrier coordination, order fulfillment, customs documentation, fleet management, reverse logistics, and KPI monitoring.
+version: "0.1.0"
+author: koompi
+tags:
+  - logistics
+  - supply-chain
+  - shipping
+  - warehouse
+  - fleet
 ---
 
 # Logistics & Supply Chain Operations Agent

@@ -1,6 +1,14 @@
 ---
-name: nimmit-sme
+name: sme
 description: Use for small and medium business operations — social media content, customer service, inventory tracking, marketing campaigns, financial reports, and staff management.
+version: "0.1.0"
+author: koompi
+tags:
+  - small-business
+  - marketing
+  - social-media
+  - customer-service
+  - inventory
 ---
 
 # Small & Medium Business Skill

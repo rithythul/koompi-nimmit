@@ -1,7 +1,70 @@
 {
-  "name": "koompi-nimmit",
-  "version": "1.0.0",
-  "private": true,
+  "name": "@koompi/nimmit",
+  "version": "0.1.0",
+  "description": "AI assistant skill packs and OpenClaw plugin — install an AI worker, teach it your job, let it work",
+  "keywords": [
+    "ai",
+    "assistant",
+    "openclaw",
+    "skills",
+    "automation",
+    "ai-agent",
+    "skill-packs",
+    "clawhub",
+    "nimmit",
+    "koompi"
+  ],
   "license": "Apache-2.0",
-  "description": "Skill packs and installer for Nimmit — an OpenClaw-powered AI assistant"
+  "publishConfig": {
+    "access": "public"
+  },
+  "type": "module",
+  "bin": {
+    "nimmit": "./bin/nimmit.mjs"
+  },
+  "main": "./dist/plugin.js",
+  "exports": {
+    ".": "./dist/plugin.js",
+    "./plugin": "./dist/plugin.js"
+  },
+  "openclaw": {
+    "extensions": [
+      "./dist/plugin.js"
+    ]
+  },
+  "files": [
+    "bin/",
+    "dist/",
+    "skill-packs/",
+    "templates/",
+    "LICENSE",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=22.16.0"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "typecheck": "tsc --noEmit",
+    "pretest": "tsc",
+    "test": "node --test dist/__tests__/*.test.js"
+  },
+  "dependencies": {
+    "commander": "^14.0.0",
+    "yaml": "^2.8.0",
+    "@inquirer/prompts": "^7.0.0"
+  },
+  "peerDependencies": {
+    "openclaw": ">=2026.0.0"
+  },
+  "peerDependenciesMeta": {
+    "openclaw": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "typescript": "^5.8.0",
+    "@types/node": "^22.0.0"
+  }
 }

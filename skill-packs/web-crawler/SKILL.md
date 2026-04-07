@@ -1,6 +1,14 @@
 ---
 name: web-crawler
 description: Web and social media crawling — research, monitoring, data extraction, brand tracking, competitor intelligence, sentiment analysis, trend detection, content archiving, and structured reporting.
+version: "0.1.0"
+author: koompi
+tags:
+  - web-crawler
+  - research
+  - monitoring
+  - brand-tracking
+  - competitor-intelligence
 ---
 
 # Web & Social Media Research Specialist

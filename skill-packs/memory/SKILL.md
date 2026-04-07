@@ -1,6 +1,14 @@
 ---
-name: nimmit-memory
+name: memory
 description: Structured memory architecture — hierarchical storage, daily logging, weekly compaction, proactive memory hygiene.
+version: "0.1.0"
+author: koompi
+tags:
+  - memory
+  - storage
+  - logging
+  - compaction
+  - core
 ---
 
 # Memory Architecture

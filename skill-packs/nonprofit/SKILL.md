@@ -1,6 +1,14 @@
 ---
-name: nimmit-nonprofit
+name: nonprofit
 description: Use for nonprofit and NGO operations — donor management, grant tracking, fundraising campaigns, volunteer coordination, program impact measurement, board governance, event planning, fund accounting, compliance reporting, and stakeholder communications.
+version: "0.1.0"
+author: koompi
+tags:
+  - nonprofit
+  - ngo
+  - donor-management
+  - grants
+  - fundraising
 ---
 
 # Nonprofit & NGO Operations

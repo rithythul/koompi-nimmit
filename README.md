@@ -1,8 +1,8 @@
-# Nimmit
+# @koompi/nimmit
 
 > Install an AI worker. Teach it your job. Let it work.
 
-Built on [OpenClaw](https://github.com/openclaw/openclaw). Shipped by KOOMPI.
+Built on [OpenClaw](https://github.com/openclaw/openclaw). Shipped by [KOOMPI](https://koompi.com).
 
 ## What Nimmit Does
 
@@ -18,11 +18,44 @@ This isn't a chatbot. It's a team member that never sleeps.
 
 ## Install
 
+**Quick start (installs Node.js + nimmit + runs guided setup):**
+
 ```bash
 curl -fsSL https://nimmit.koompi.ai/install | bash
 ```
 
-One command. Five minutes. Running as a service.
+**Manual install:**
+
+```bash
+npm install -g @koompi/nimmit
+nimmit onboard
+```
+
+Requires Node.js 22.16+.
+
+## CLI Commands
+
+```
+nimmit onboard          # Guided first-time setup
+nimmit status           # Show installation status
+nimmit update           # Update OpenClaw runtime + refresh skills
+nimmit skills list      # List all available skill packs
+nimmit skills add <n>   # Install skill packs
+nimmit skills remove <n># Remove skill packs
+nimmit publish          # Publish skill packs to ClawHub
+```
+
+## OpenClaw Plugin
+
+Nimmit also works as an OpenClaw plugin. When installed alongside OpenClaw, it registers slash commands (`/nimmit-status`, `/nimmit-skills`, `/nimmit-update`) directly in the AI assistant.
+
+```json
+{
+  "openclaw": {
+    "extensions": ["./dist/plugin.js"]
+  }
+}
+```
 
 ## Skill Packs
 
@@ -30,48 +63,50 @@ Skill packs give Nimmit domain knowledge on day one. They're **starter kits, not
 
 ### Core
 
-| Pack | Purpose | What It Does |
-|------|---------|--------------|
-| 🧠 **Memory** | Memory architecture | Hierarchical storage, daily logging, weekly compaction, proactive memory hygiene |
+| Pack | Purpose |
+|------|---------|
+| **Memory** | Hierarchical storage, daily logging, weekly compaction, proactive memory hygiene |
 
 Installed by default. Teaches Nimmit to write everything down, index (not dump), and prune aggressively.
 
 ### Business & Operations
 
-| Pack | Domain | What Nimmit Can Do |
-|------|--------|-------------------|
-| 👔 **Executive** | Leadership, C-suite | Morning briefings, decision support, report drafting, overnight intelligence, weekly reviews |
-| 🏪 **SME** | Any business | Social media, customer service, inventory alerts, marketing campaigns, financial reports |
-| 💰 **Finance** | Accounting, CFO | AP/AR, reconciliation, budgets, P&L, cash flow forecasting, month-end close |
-| 🎨 **Creative** | Agencies, studios | Project management, client briefs, content calendars, review/approval workflows, asset management |
-| 🚚 **Logistics** | Supply chain | Shipment tracking, warehouse management, route planning, customs docs, fleet coordination |
-| 🏗️ **Construction** | Project management | Scheduling, daily site reports, subcontractor coordination, procurement, safety compliance |
+| Pack | Domain |
+|------|--------|
+| **Executive** | Morning briefings, decision support, report drafting, strategic thinking |
+| **SME** | Social media, customer service, inventory alerts, marketing, financials |
+| **Finance** | AP/AR, reconciliation, budgets, P&L, cash flow, month-end close |
+| **Creative** | Project management, client briefs, content calendars, asset management |
+| **Logistics** | Shipment tracking, route planning, customs docs, fleet coordination |
+| **Construction** | Scheduling, daily site reports, subcontractor coordination, safety compliance |
 
 ### Public Sector & Education
 
-| Pack | Domain | What Nimmit Can Do |
-|------|--------|-------------------|
-| 🏛️ **Government** | Ministries, departments | Formal documents, meeting prep, procurement tracking, compliance, inter-department communication |
-| 🏫 **Education** | Schools, universities | Scheduling, curriculum planning, attendance tracking, parent communication, content generation |
-| 🤝 **Nonprofit** | NGOs, foundations | Donor management, grant tracking, fundraising, volunteer coordination, impact reporting |
+| Pack | Domain |
+|------|--------|
+| **Government** | Formal documents, meeting prep, procurement, compliance |
+| **Education** | Scheduling, curriculum planning, attendance, parent communication |
+| **Nonprofit** | Donor management, grant tracking, volunteer coordination, impact reporting |
 
 ### Professional Services
 
-| Pack | Domain | What Nimmit Can Do |
-|------|--------|-------------------|
-| ⚕️ **Healthcare** | Clinics, practices | Patient scheduling, records management, prescriptions, follow-ups, lab tracking, compliance |
-| ⚖️ **Legal** | Law firms | Case management, document drafting, deadline tracking, billing, discovery, court calendar |
-| 🏠 **Real Estate** | Brokerages, agents | Listings, client pipeline, showings, contracts, market analysis, transaction lifecycle |
-| 🌾 **Agriculture** | Farms, cooperatives | Crop planning, weather alerts, inventory, market prices, harvest tracking, equipment maintenance |
-| 🏨 **Hospitality** | Hotels, resorts | Reservations, guest communication, housekeeping, revenue management, reviews, events |
+| Pack | Domain |
+|------|--------|
+| **Healthcare** | Patient scheduling, records, prescriptions, follow-ups, compliance |
+| **Legal** | Case management, document drafting, deadline tracking, billing, discovery |
+| **Real Estate** | Listings, client pipeline, contracts, market analysis |
+| **Agriculture** | Crop planning, weather alerts, market prices, harvest tracking |
+| **Hospitality** | Reservations, guest communication, housekeeping, revenue management |
 
 ### Intelligence & Research
 
-| Pack | Domain | What Nimmit Can Do |
-|------|--------|-------------------|
-| 🌍 **Geopolitical** | Risk analysis, OSINT | Conflict monitoring, sanctions tracking, scenario analysis, stakeholder mapping, intelligence briefs |
-| 📊 **Economist** | Economic analysis | Macro indicators, central bank monitoring, forecasting, inflation analysis, research notes |
-| 🕷️ **Web Crawler** | Research, monitoring | Social media monitoring, brand tracking, competitor intelligence, trend detection, news aggregation |
+| Pack | Domain |
+|------|--------|
+| **Geopolitical** | Conflict monitoring, sanctions tracking, scenario analysis, intelligence briefs |
+| **Economist** | Macro indicators, central bank monitoring, forecasting, research notes |
+| **Web Crawler** | Social media monitoring, brand tracking, competitor intelligence, trend detection |
+
+All 18 skill packs are available on [ClawHub](https://clawhub.ai) under the `koompi/` namespace.
 
 Don't see your domain? Nimmit works without a skill pack. Or write your own — it's a single markdown file.
 
@@ -79,57 +114,36 @@ Don't see your domain? Nimmit works without a skill pack. Or write your own — 
 
 ```
 You install Nimmit
-    → OpenClaw seeds the brain (SOUL.md, IDENTITY.md, HEARTBEAT.md, AGENTS.md)
-    → You pick a skill pack (domain knowledge + proactive behavior)
-    → Nimmit gets a heartbeat (wakes up, checks what needs doing, does it)
-    → It works — every day, on its own
+    -> OpenClaw seeds the brain (SOUL.md, IDENTITY.md, HEARTBEAT.md)
+    -> You pick a skill pack (domain knowledge + proactive behavior)
+    -> Nimmit gets a heartbeat (wakes up, checks what needs doing, does it)
+    -> It works — every day, on its own
 ```
-
-**The morning briefing** is just the standup. Nimmit's real work happens all day:
-
-- Picks up tasks and completes them
-- Responds to messages on your behalf
-- Drafts documents in the right tone and language
-- Flags what needs your attention — ignores what doesn't
-- Remembers decisions and builds institutional memory
-
-## Tech Stack
-
-- **Runtime:** [OpenClaw](https://github.com/openclaw/openclaw) — open-source AI gateway
-- **Brain:** Markdown workspace — seeded by OpenClaw's built-in templates
-- **Skills:** Modular domain packs with Heartbeat behavior — or bring your own
-- **Channels:** Telegram, terminal, extensible
-- **Service:** systemd (auto-start, auto-restart)
-- **Hardware:** Any Linux machine, including KOOMPI Mini
 
 ## Structure
 
 ```
 koompi-nimmit/
-├── install.sh              # One-command installer
-├── skill-packs/
-│   ├── agriculture/        # Farms + cooperatives
-│   ├── construction/       # Project management
-│   ├── creative/           # Agencies + studios
-│   ├── economist/          # Economic analysis
-│   ├── education/          # Schools + universities
-│   ├── executive/          # Leadership + C-suite
-│   ├── finance/            # Accounting + CFO
-│   ├── geopolitical/       # Risk analysis + OSINT
-│   ├── government/         # Ministries + departments
-│   ├── healthcare/         # Clinics + practices
-│   ├── hospitality/        # Hotels + resorts
-│   ├── legal/              # Law firms
-│   ├── logistics/          # Supply chain
-│   ├── memory/             # Memory architecture (core)
-│   ├── nonprofit/          # NGOs + foundations
-│   ├── real-estate/        # Brokerages + agents
-│   ├── sme/                # Small & medium businesses
-│   └── web-crawler/        # Research + monitoring
-├── worker/                 # Cloudflare Worker (nimmit.koompi.ai)
-│   ├── src/index.ts
-│   └── wrangler.toml
-└── README.md
+├── bin/nimmit.mjs              # CLI entry point
+├── src/
+│   ├── cli/
+│   │   ├── index.ts            # CLI program definition
+│   │   └── commands/
+│   │       ├── onboard.ts      # Guided setup
+│   │       ├── update.ts       # Runtime + skill refresh
+│   │       ├── status.ts       # Installation status
+│   │       ├── skills.ts       # Skill pack management
+│   │       └── publish.ts      # ClawHub publishing
+│   ├── config.ts               # Config I/O (~/.nimmit/config.json)
+│   ├── skills.ts               # Skill pack registry + install/remove
+│   ├── templates.ts            # Template rendering (SOUL/IDENTITY/HEARTBEAT)
+│   ├── plugin.ts               # OpenClaw plugin interface
+│   └── types.ts                # Shared types + VERSION
+├── skill-packs/                # 18 bundled domain skill packs
+├── templates/                  # Onboarding templates (SOUL.md, etc.)
+├── install.sh                  # Bootstrap installer
+├── worker/                     # Cloudflare Worker (nimmit.koompi.ai)
+└── package.json
 ```
 
 ## License

@@ -1,6 +1,14 @@
 ---
-name: nimmit-economist
+name: economist
 description: Use for economic analysis and research — macroeconomic indicator tracking, central bank policy monitoring, inflation decomposition, labor market analysis, fiscal policy assessment, economic forecasting, scenario modeling, market drivers analysis, emerging market risk, and research note drafting.
+version: "0.1.0"
+author: koompi
+tags:
+  - economics
+  - macro-indicators
+  - central-bank
+  - forecasting
+  - analysis
 ---
 
 # Economic Analysis & Research

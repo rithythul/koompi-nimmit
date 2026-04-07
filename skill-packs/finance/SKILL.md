@@ -1,6 +1,14 @@
 ---
-name: nimmit-finance
+name: finance
 description: Use for finance and accounting operations — AP/AR tracking, invoicing, bank reconciliation, budgeting, financial reporting, expense management, tax prep, payroll coordination, audit readiness, and cash flow forecasting.
+version: "0.1.0"
+author: koompi
+tags:
+  - accounting
+  - finance
+  - budgets
+  - reconciliation
+  - cash-flow
 ---
 
 # Finance & Accounting Operations

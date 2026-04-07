@@ -1,171 +1,79 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Nimmit Installer
+# Nimmit — lightweight bootstrap installer
 # Usage: curl -fsSL https://nimmit.koompi.ai/install | bash
+#
+# This script:
+#   1. Ensures Node.js 22+ is available
+#   2. Installs the 'nimmit' npm package globally
+#   3. Runs 'nimmit onboard' for guided setup
+#
+# Security note: platform package installation uses sudo where needed.
+# If you prefer not to pipe to shell, install Node.js 22+ manually then:
+#   npm install -g @koompi/nimmit && nimmit onboard
 
-info()  { echo -e "\033[0;36m🦅\033[0m $1"; }
-ok()    { echo -e "\033[0;32m✅\033[0m $1"; }
-warn()  { echo -e "\033[1;33m⚠️\033[0m $1"; }
-fail()  { echo -e "\033[0;31m❌\033[0m $1"; exit 1; }
+info()  { echo -e "\033[0;36m[nimmit]\033[0m $1"; }
+ok()    { echo -e "\033[0;32m[ok]\033[0m $1"; }
+fail()  { echo -e "\033[0;31m[error]\033[0m $1"; exit 1; }
 
-[[ $EUID -eq 0 ]] && fail "Don't run as root."
+# ─── 1. Node.js 22+ ───
+install_node() {
+  if command -v node &>/dev/null; then
+    NODE_VER=$(node -v | sed 's/v//' | cut -d. -f1)
+    if (( NODE_VER >= 22 )); then
+      ok "Node.js $(node -v)"
+      return
+    fi
+    info "Node.js v$(node -v) found, but 22+ required."
+  else
+    info "Node.js not found."
+  fi
 
-AGENT="nimmit"
-SKILL_BASE="https://nimmit.koompi.ai/skill-packs"
+  info "Installing Node.js 22..."
 
-# ─── 1. Bun ───
-info "Installing Bun..."
-if command -v bun &>/dev/null; then
-  ok "Bun $(bun --version)"
-else
-  curl -fsSL https://bun.sh/install | bash
-  export BUN_INSTALL="$HOME/.bun" PATH="$HOME/.bun/bin:$PATH"
-  ok "Bun installed"
-fi
+  if [[ "$(uname)" == "Darwin" ]]; then
+    if command -v brew &>/dev/null; then
+      brew install node@22 2>&1 | tail -1
+    else
+      fail "Install Node.js 22+: https://nodejs.org/"
+    fi
+  elif [[ -f /etc/debian_version ]]; then
+    curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash - 2>/dev/null
+    sudo apt-get install -y nodejs 2>/dev/null
+  elif [[ -f /etc/fedora-release ]] || [[ -f /etc/redhat-release ]]; then
+    curl -fsSL https://rpm.nodesource.com/setup_22.x | sudo -E bash - 2>/dev/null
+    sudo dnf install -y nodejs 2>/dev/null || sudo yum install -y nodejs 2>/dev/null
+  elif command -v pacman &>/dev/null; then
+    sudo pacman -S --noconfirm nodejs npm 2>/dev/null
+  else
+    if ! command -v nvm &>/dev/null; then
+      curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/master/install.sh | bash
+      export NVM_DIR="$HOME/.nvm"
+      [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+    fi
+    nvm install 22
+  fi
 
-# ─── 2. OpenClaw ───
-info "Installing OpenClaw..."
-if command -v openclaw &>/dev/null; then
-  ok "OpenClaw $(openclaw --version 2>/dev/null | head -1)"
-else
-  bun install -g openclaw 2>&1 | tail -1
-  ok "OpenClaw installed"
-fi
+  command -v node &>/dev/null || fail "Node.js installation failed. Install manually: https://nodejs.org/"
 
-# ─── 3. Register agent (OpenClaw seeds its own brain templates) ───
-info "Registering $AGENT agent..."
-if openclaw agents list --json 2>/dev/null | grep -q "\"$AGENT\""; then
-  ok "Agent '$AGENT' already registered"
-else
-  openclaw agents add --name "$AGENT" --non-interactive 2>/dev/null \
-    && ok "Agent '$AGENT' registered" \
-    || warn "Run manually: openclaw agents add --name $AGENT"
-fi
-
-WORKSPACE=$(openclaw agents show "$AGENT" --json 2>/dev/null | sed -n 's/.*"workspace"\s*:\s*"\([^"]*\)".*/\1/p' | head -1)
-WORKSPACE="${WORKSPACE:-$HOME/.openclaw/agents/$AGENT/workspace}"
-
-# ─── 4. Skill packs (multi-select) ───
-echo ""
-info "Select skill packs (space-separated, e.g. '1 3 7'):"
-echo ""
-echo "  Business & Operations"
-echo "    1) 👔 Executive        2) 🏪 SME"
-echo "    3) 💰 Finance          4) 🎨 Creative"
-echo "    5) 🚚 Logistics        6) 🏗️ Construction"
-echo ""
-echo "  Public Sector & Education"
-echo "    7) 🏛️ Government       8) 🏫 Education"
-echo "    9) 🤝 Nonprofit"
-echo ""
-echo "  Professional Services"
-echo "   10) ⚕️ Healthcare      11) ⚖️ Legal"
-echo "   12) 🏠 Real Estate     13) 🌾 Agriculture"
-echo "   14) 🏨 Hospitality"
-echo ""
-echo "  Intelligence & Research"
-echo "   15) 🌍 Geopolitical    16) 📊 Economist"
-echo "   17) 🕷️ Web Crawler"
-echo ""
-echo "   all) Install everything    skip) None"
-echo ""
-read -rp "Choose: " PICKS </dev/tty
-
-resolve_skill() {
-  case $1 in
-    1) echo "executive" ;; 2) echo "sme" ;; 3) echo "finance" ;; 4) echo "creative" ;;
-    5) echo "logistics" ;; 6) echo "construction" ;; 7) echo "government" ;; 8) echo "education" ;;
-    9) echo "nonprofit" ;; 10) echo "healthcare" ;; 11) echo "legal" ;; 12) echo "real-estate" ;;
-    13) echo "agriculture" ;; 14) echo "hospitality" ;; 15) echo "geopolitical" ;; 16) echo "economist" ;;
-    17) echo "web-crawler" ;; *) echo "" ;;
-  esac
+  NODE_VER=$(node -v | sed 's/v//' | cut -d. -f1)
+  (( NODE_VER >= 22 )) || fail "Node.js 22+ required, got $(node -v)"
+  ok "Node.js $(node -v)"
 }
 
-SKILLS=()
-if [[ "$PICKS" == "all" ]]; then
-  for i in $(seq 1 17); do SKILLS+=("$(resolve_skill $i)"); done
-elif [[ "$PICKS" != "skip" && -n "$PICKS" ]]; then
-  for p in $PICKS; do
-    s=$(resolve_skill "$p")
-    [[ -n "$s" ]] && SKILLS+=("$s")
-  done
-fi
+install_node
 
-if (( ${#SKILLS[@]} > 5 )); then
-  warn "Installing ${#SKILLS[@]} packs — this increases token costs per API call."
-fi
+# ─── 2. npm check ───
+command -v npm &>/dev/null || fail "npm not found. Install Node.js from https://nodejs.org/"
 
-INSTALLED=0
-for SKILL in "${SKILLS[@]}"; do
-  DEST="$WORKSPACE/skills/nimmit-${SKILL}"
-  mkdir -p "$DEST"
-  if curl -fsSL "$SKILL_BASE/$SKILL/SKILL.md" -o "$DEST/SKILL.md" 2>/dev/null; then
-    ok "$SKILL"
-    INSTALLED=$((INSTALLED + 1))
-  else
-    warn "Could not download $SKILL"
-  fi
-done
-(( INSTALLED > 0 )) && ok "$INSTALLED skill pack(s) installed"
+# ─── 3. Install nimmit ───
+info "Installing nimmit..."
+npm install -g @koompi/nimmit 2>&1 | tail -3
+ok "nimmit installed"
 
-# ─── 5. Memory architecture (recommended) ───
+# ─── 4. Run onboard ───
 echo ""
-read -rp "Install memory architecture skill? (recommended) [Y/n]: " MEM_PICK </dev/tty
-MEM_PICK="${MEM_PICK:-Y}"
-if [[ "$MEM_PICK" =~ ^[Yy] ]]; then
-  DEST="$WORKSPACE/skills/nimmit-memory"
-  mkdir -p "$DEST"
-  curl -fsSL "$SKILL_BASE/memory/SKILL.md" -o "$DEST/SKILL.md" 2>/dev/null \
-    && ok "Memory architecture installed" \
-    || warn "Could not download memory skill"
-fi
-
-# ─── 6. Telegram ───
+info "Starting guided setup..."
 echo ""
-read -rp "Telegram bot token (blank to skip): " TG_TOKEN </dev/tty
-if [[ -n "$TG_TOKEN" ]]; then
-  ENV_FILE="$HOME/.openclaw/.env"
-  mkdir -p "$(dirname "$ENV_FILE")"
-  if [[ -f "$ENV_FILE" ]] && grep -q "TELEGRAM_BOT_TOKEN" "$ENV_FILE"; then
-    sed -i "s/TELEGRAM_BOT_TOKEN=.*/TELEGRAM_BOT_TOKEN=\"$TG_TOKEN\"/" "$ENV_FILE"
-  else
-    echo "TELEGRAM_BOT_TOKEN=\"$TG_TOKEN\"" >> "$ENV_FILE"
-  fi
-  chmod 600 "$ENV_FILE"
-  openclaw config set channels.telegram.enabled true 2>/dev/null || true
-  ok "Telegram configured"
-fi
-
-# ─── 7. systemd service ───
-info "Setting up service..."
-SERVICE="$HOME/.config/systemd/user/openclaw-gateway.service"
-mkdir -p "$(dirname "$SERVICE")"
-cat > "$SERVICE" << EOF
-[Unit]
-Description=OpenClaw Gateway ($AGENT)
-After=network-online.target
-
-[Service]
-Type=simple
-EnvironmentFile=-$HOME/.openclaw/.env
-ExecStart=$(which bun) run $(which openclaw) gateway
-Restart=on-failure
-RestartSec=10
-
-[Install]
-WantedBy=default.target
-EOF
-systemctl --user daemon-reload 2>/dev/null || true
-systemctl --user enable openclaw-gateway 2>/dev/null || true
-ok "Service configured"
-
-# ─── Done ───
-echo ""
-echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-echo -e "  \033[0;32m🦅 Nimmit is ready.\033[0m"
-echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-echo ""
-echo "  Start: openclaw gateway --force"
-echo "  Or:    systemctl --user start openclaw-gateway"
-echo ""
+nimmit onboard

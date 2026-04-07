@@ -1,6 +1,14 @@
 ---
-name: nimmit-education
+name: education
 description: Use for school and university operations — scheduling, curriculum planning, student progress, parent communication, exams, and content generation.
+version: "0.1.0"
+author: koompi
+tags:
+  - education
+  - school
+  - curriculum
+  - scheduling
+  - student-progress
 ---
 
 # Education Skill

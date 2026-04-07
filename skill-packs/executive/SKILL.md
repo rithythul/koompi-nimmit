@@ -1,6 +1,14 @@
 ---
-name: nimmit-executive
+name: executive
 description: Use for C-level executives, ministers, and leaders — daily briefings, decision support, information gathering, report drafting, schedule awareness, and strategic thinking.
+version: "0.1.0"
+author: koompi
+tags:
+  - executive
+  - leadership
+  - briefing
+  - decision-support
+  - c-suite
 ---
 
 # Executive Chief of Staff

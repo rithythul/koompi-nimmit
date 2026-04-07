@@ -1,6 +1,14 @@
 ---
-name: nimmit-government
+name: government
 description: Use for government and public sector workflows — formal documents, meeting minutes, reporting, procurement, compliance, and inter-department communication.
+version: "0.1.0"
+author: koompi
+tags:
+  - government
+  - public-sector
+  - compliance
+  - procurement
+  - formal-documents
 ---
 
 # Government & Public Sector Skill

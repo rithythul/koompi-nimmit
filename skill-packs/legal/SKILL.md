@@ -1,6 +1,14 @@
 ---
-name: nimmit-legal
+name: legal
 description: Use for law firm and legal practice operations — case management, document drafting, client communication, billing, court deadlines, discovery workflows, compliance tracking, and matter lifecycle management.
+version: "0.1.0"
+author: koompi
+tags:
+  - legal
+  - law-firm
+  - case-management
+  - document-drafting
+  - billing
 ---
 
 # Legal Practice Operations

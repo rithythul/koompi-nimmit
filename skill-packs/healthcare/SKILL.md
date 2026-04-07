@@ -1,6 +1,14 @@
 ---
-name: nimmit-healthcare
+name: healthcare
 description: Use for clinic and healthcare facility operations — patient scheduling, medical records, prescriptions, lab tracking, staff coordination, billing, compliance, and patient communication.
+version: "0.1.0"
+author: koompi
+tags:
+  - healthcare
+  - clinic
+  - patient-scheduling
+  - medical-records
+  - prescriptions
 ---
 
 # Healthcare & Clinic Operations Skill

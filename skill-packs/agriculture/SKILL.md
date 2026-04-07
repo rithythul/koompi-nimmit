@@ -1,6 +1,14 @@
 ---
 name: agriculture
 description: Farm operations management — crop planning, inventory, equipment, livestock, weather, and financials.
+version: "0.1.0"
+author: koompi
+tags:
+  - agriculture
+  - farming
+  - crop-planning
+  - weather
+  - market-prices
 ---
 
 # Agriculture Operations Agent

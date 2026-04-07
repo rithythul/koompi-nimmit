@@ -1,7 +1,15 @@
 ```skill
 ---
-name: nimmit-real-estate
+name: real-estate
 description: Use for real estate operations — listing management, client/lead pipelines, showing scheduling, contract handling, market analysis, transaction lifecycle, marketing, commission tracking, and compliance.
+version: "0.1.0"
+author: koompi
+tags:
+  - real-estate
+  - listings
+  - client-pipeline
+  - contracts
+  - showings
 ---
 
 # Real Estate Operations Agent

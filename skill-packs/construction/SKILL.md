@@ -1,6 +1,14 @@
 ---
-name: nimmit-construction
+name: construction
 description: Use for construction and project management operations — project scheduling, daily site reports, subcontractor coordination, material procurement, budget tracking, change orders, safety compliance, permits, RFIs, punch lists, equipment, quality control, weather impact, and client communication.
+version: "0.1.0"
+author: koompi
+tags:
+  - construction
+  - project-management
+  - scheduling
+  - safety
+  - subcontractor
 ---
 
 # Construction Project Management Agent

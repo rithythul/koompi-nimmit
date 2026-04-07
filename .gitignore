@@ -1,6 +1,8 @@
 node_modules/
 bun.lock
+package-lock.json
 *.log
+*.tsbuildinfo
 .env
 .env.*
 dist/

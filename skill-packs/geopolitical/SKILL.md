@@ -1,6 +1,14 @@
 ---
-name: nimmit-geopolitical
+name: geopolitical
 description: Use for geopolitical intelligence and analysis — risk monitoring, country profiles, OSINT collection, stakeholder mapping, scenario analysis, sanctions tracking, trade policy, election monitoring, resource geopolitics, and intelligence briefings.
+version: "0.1.0"
+author: koompi
+tags:
+  - geopolitical
+  - risk-analysis
+  - osint
+  - conflict-monitoring
+  - sanctions
 ---
 
 # Geopolitical Intelligence Analyst

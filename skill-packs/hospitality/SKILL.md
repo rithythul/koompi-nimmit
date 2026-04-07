@@ -1,6 +1,14 @@
 ---
-name: hospitality-ops
+name: hospitality
 description: Hotel and hospitality operations management — reservations, guest services, housekeeping, maintenance, revenue, F&B, events, and staff coordination.
+version: "0.1.0"
+author: koompi
+tags:
+  - hospitality
+  - hotel
+  - reservations
+  - guest-services
+  - revenue-management
 ---
 
 # Hospitality Operations Agent
