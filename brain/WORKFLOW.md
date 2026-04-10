@@ -1,103 +1,73 @@
-# Workflow
+# WORKFLOW.md — How {{AGENT_NAME}} Works
 
-How {{AGENT_NAME}} works — the systems behind the responses.
+Processes, memory management, and operational workflows.
 
-## Memory System
+## Memory Architecture
 
-Two-tier memory architecture:
+```
+memory/
+├── daily/          # Daily logs (one per day)
+├── semantic/       # What things are (products, team, tech, business)
+├── procedural/     # How to do things (deploy, new project, learn from corrections)
+├── decisions/      # Why we decided (monthly decision logs)
+├── failures/       # What failed (known-issues, lessons-learned)
+├── episodic/       # What happened when (events, competitive intel)
+├── outcomes/       # Project outcomes and deliverables
+├── research/       # Research notes and analysis
+└── working/        # Current state (NOW.md lives here)
+```
 
-### Global Memory (`/memory`)
-Persistent knowledge that applies across all departments:
-- `semantic/` — What things are (concepts, definitions, market knowledge)
-- `procedural/` — How to do things (processes, templates, playbooks)
-- `decisions/` — Why we decided (decision logs with context)
-- `failures/` — What went wrong (post-mortems, known issues)
-- `episodic/` — What happened (daily logs, meeting notes)
-- `working/` — Current state (active projects, in-progress work)
-- `research/` — Deep dives (research archives, analysis)
-- `outcomes/` — What resulted (metrics, results tracking)
+## Writing Rules
+- About the owner → USER.md
+- Company event → MEMORY.md
+- Daily activity → memory/daily/YYYY-MM-DD.md
+- Decision made → memory/decisions/YYYY-MM.md
+- Something failed → memory/failures/
+- Project completed → memory/outcomes/
 
-### Per-Topic Memory
-Each department channel maintains its own context:
-- Recent conversations
-- Active tasks
-- Department-specific knowledge
-- Ongoing threads
+### Write It Down
+Memory is limited. If you want to remember something, WRITE IT TO A FILE.
 
-### Memory Rules
-1. **Write immediately** — Don't batch memory updates. Write when you learn.
-2. **Be specific** — "User prefers X" not "User has preferences"
-3. **Include context** — Why something was decided, not just what
-4. **Prune regularly** — Delete outdated information during consolidation
-5. **Cross-reference** — Link related memories across categories
+### Memory Retention
+- Daily logs older than 30 days → archive or delete
+- MEMORY.md → periodically distill
+- Remove outdated entries — stale memory is worse than no memory
 
-## Sprint Process
+## How I Learn
 
-{{AGENT_NAME}} works in sprints:
+### Silent observation
+- "Too long" twice → update SOUL.md: "keep concise"
+- Tone correction → update SOUL.md
+- New person mentioned → update USER.md
 
-### Sprint Structure
-1. **Planning** — Break goals into tasks, estimate effort, prioritize
-2. **Execution** — Work through tasks, update progress daily
-3. **Review** — Assess what shipped, what didn't, why
-4. **Retro** — Extract learnings, adjust process
+### Explicit teaching
+- "Remember X" about the owner → USER.md
+- "Company-wide: Z" → MEMORY.md
 
-### Task States
-- `backlog` — Identified but not scheduled
-- `planned` — Committed to current sprint
-- `in-progress` — Actively being worked on
-- `review` — Done, needs approval
-- `done` — Shipped and verified
-- `blocked` — Can't proceed, needs input
+## Role-Based Task Flow
 
-### Priority Framework
-1. **P0** — Broken in production / revenue impact → Drop everything
-2. **P1** — Committed deliverable this sprint → Do today
-3. **P2** — Important but not urgent → Schedule this sprint
-4. **P3** — Nice to have → Backlog
+```
+Task arrives → identify role(s) → execute → deliver
 
-## Tech Stack Enforcement
+├── Direction/coordination  → Strategy
+├── What to build            → Product
+├── How to build it          → Engineering
+├── How it looks/feels       → Design
+├── How to ship/maintain     → DevOps
+├── How to reach customers   → Growth
+├── How to run efficiently   → Operations
+└── Is it correct/ready      → QA
 
-When writing code, enforce these standards:
+Multi-role → collaborate directly (mesh)
+Needs {{OWNER_NAME}} → escalate
+```
 
-1. **TypeScript strict** — No `any`, no implicit returns, strict null checks
-2. **Tests required** — No shipping code without tests
-3. **Types over comments** — If you need a comment to explain the type, the type is wrong
-4. **Small PRs** — If a PR touches 10+ files, break it up
-5. **No dead code** — Delete it, don't comment it out
+## Sprint Process (Engineering)
 
-## Cross-Department Routing
+Think → Plan → Build → Review → Test → Ship → Reflect
 
-When a task spans departments:
+## Tech Stack
+{{TECH_STACK}}
 
-1. **Identify primary** — Which department owns the outcome?
-2. **Identify supporting** — Who else needs to contribute?
-3. **Create briefs** — Each department gets a focused brief
-4. **Coordinate handoffs** — Define what each department delivers and when
-5. **Synthesize** — Primary department combines all outputs
-
-Example: "Launch new feature" spans Build (code), Content (announcement), Growth (distribution), Product (positioning).
-
-## Learning Behaviors
-
-{{AGENT_NAME}} actively learns:
-
-### After Every Task
-- What went well?
-- What could be faster next time?
-- Any new patterns to remember?
-
-### After Every Mistake
-- What happened?
-- Why did it happen?
-- How to prevent it?
-- Write to `memory/failures/`
-
-### After Every Win
-- What worked?
-- Is it repeatable?
-- Write to `memory/procedural/`
-
-### Weekly
-- Review all learnings
-- Update procedural memory
-- Propose process improvements
+## Cross-Role Handoffs
+No formal handoffs — mesh structure. Roles collaborate directly.
