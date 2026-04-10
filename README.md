@@ -152,11 +152,6 @@ koompi-nimmit/
 └── README.md
 ```
 
-## Screenshots
-
-![Agent building an app](docs/screenshots/demo.png)
-
-_Demo: Agent building a full-stack app in under 2 minutes._
 
 ## Troubleshooting
 
