@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# OpenClaw Agent Template installer v4.0.0
-# Deploys an OpenClaw AI agent from the brain/ template.
+# Nimmit installer v4.0.0
+# Deploys Nimmit AI agent from the brain/ template.
 #
 # Interactive:
 #   curl -fsSL https://raw.githubusercontent.com/koompi/koompi-nimmit/master/install.sh | bash
 #
 # Non-interactive (CI/automation):
-#   bash install.sh --non-interactive --name "Atlas" --org "Acme" --token "123:ABC..."
+#   bash install.sh --non-interactive --token "123:ABC..." [--google-key "AIza..."]
 
 VERSION="4.0.0"
 REPO="koompi/koompi-nimmit"
@@ -107,19 +107,10 @@ NON_INTERACTIVE=false
 
 while [[ $# -gt 0 ]]; do
     case $1 in
-        --name)             AGENT_NAME="$2"; shift 2 ;;
-        --org)              ORG_NAME="$2"; shift 2 ;;
-        --slug)             SLUG="$2"; shift 2 ;;
-        --owner)            OWNER_NAME="$2"; shift 2 ;;
-        --owner-id)         OWNER_ID="$2"; shift 2 ;;
         --token|--telegram-token) BOT_TOKEN="$2"; shift 2 ;;
         --google-key)       GOOGLE_API_KEY="$2"; shift 2 ;;
         --zai-key)          ZAI_API_KEY="$2"; shift 2 ;;
         --copilot-token)    COPILOT_TOKEN="$2"; shift 2 ;;
-        --channel)          CHANNEL="$2"; shift 2 ;;
-        --timezone)         TIMEZONE="$2"; shift 2 ;;
-        --language)         LANGUAGE="$2"; shift 2 ;;
-        --model)            PRIMARY_MODEL="$2"; shift 2 ;;
         --skip-deps)        SKIP_DEPS=true; shift ;;
         --divisions)        DIVISIONS=true; shift ;;
         --non-interactive)  NON_INTERACTIVE=true; shift ;;
@@ -128,22 +119,14 @@ while [[ $# -gt 0 ]]; do
             cat <<HELP
 Usage: bash install.sh [OPTIONS]
 
-Deploy a turnkey AI agent powered by OpenClaw.
+Deploy Nimmit AI agent powered by OpenClaw.
 Runs interactively by default. Pass --non-interactive for CI.
 
 Options:
-  --name NAME             Agent name (e.g. "Nimmit")
-  --org NAME              Organization name
-  --owner NAME            Owner's display name
-  --owner-id ID           Owner's Telegram user ID
-  --token TOKEN           Telegram bot token
-  --google-key KEY        Google AI API key (Gemini)
-  --zai-key KEY           ZAI API key
-  --copilot-token TOKEN   GitHub Copilot token
-  --model MODEL           Primary chat model
-  --channel CHANNEL       telegram|discord (default: telegram)
-  --timezone TZ           Timezone (default: auto-detect)
-  --language LANG         Language code (default: en)
+  --token TOKEN           Telegram bot token (required)
+  --google-key KEY        Google AI API key (Gemini, optional)
+  --zai-key KEY           ZAI API key (optional)
+  --copilot-token TOKEN   GitHub Copilot token (optional)
   --skip-deps             Skip system packages
   --divisions             Enable all 9 divisions
   --non-interactive       Skip all prompts (use flags only)
@@ -187,60 +170,30 @@ detect_timezone() {
 interactive_setup() {
     echo ""
     echo -e "${BOLD}${MAGENTA}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
-    echo -e "${BOLD}${MAGENTA}  OpenClaw Agent Template — Installer v${VERSION}${NC}"
+    echo -e "${BOLD}${MAGENTA}  Nimmit Installer v${VERSION}${NC}"
     echo -e "${BOLD}${MAGENTA}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
     echo ""
-    echo -e "  ${DIM}This will set up an AI agent on this machine.${NC}"
-    echo -e "  ${DIM}It installs Node.js, Bun, OpenClaw, and configures your agent brain.${NC}"
+    echo -e "  ${DIM}This will set up Nimmit AI agent on this machine.${NC}"
+    echo -e "  ${DIM}It installs Node.js, Bun, OpenClaw, and configures the agent brain.${NC}"
     echo -e "  ${DIM}Press Ctrl+C at any time to cancel.${NC}"
     echo ""
 
-    # ── Step 1: Agent identity ──
-    echo -e "${BOLD}${BLUE}  Step 1/5: Agent Identity${NC}"
-    echo -e "  ${DIM}Choose a name and company for your AI agent.${NC}"
-    echo ""
-
-    ask "Agent name" "${AGENT_NAME:-Nimmit}"
-    AGENT_NAME="$REPLY"
-
-    ask "Company / Organization" "${ORG_NAME:-$AGENT_NAME}"
-    ORG_NAME="$REPLY"
-
-    SLUG="${SLUG:-$(echo "$AGENT_NAME" | tr '[:upper:]' '[:lower:]' | tr ' ' '-' | tr -cd '[:alnum:]-')}"
-
-    info "Your brain will live at ~/.openclaw/<slug>/"
-    info "Your work output goes to ~/workspace/"
-
-    echo ""
-
-    # ── Step 2: Owner ──
-    echo -e "${BOLD}${BLUE}  Step 2/5: Owner${NC}"
-    echo -e "  ${DIM}Who owns this agent? This is used for access control.${NC}"
-    echo ""
-
-    ask "Your name" "${OWNER_NAME:-}"
-    OWNER_NAME="$REPLY"
-
-    ask "Your Telegram user ID" "${OWNER_ID:-}"
-    OWNER_ID="$REPLY"
-    if [[ -z "$OWNER_ID" ]]; then
-        echo -e "  ${DIM}Tip: Send /start to @userinfobot on Telegram to get your ID.${NC}"
-        ask "Your Telegram user ID"
-        OWNER_ID="$REPLY"
-    fi
+    # Hardcoded values for Nimmit
+    AGENT_NAME="Nimmit"
+    ORG_NAME="Nimmit"
+    SLUG="nimmit"
+    OWNER_NAME=""
+    OWNER_ID=""
 
     detect_timezone
-    ask "Timezone" "$TIMEZONE"
-    TIMEZONE="$REPLY"
 
-    ask "Language" "${LANGUAGE:-en}"
-    LANGUAGE="$REPLY"
-
+    info "Installing Nimmit (~/.openclaw/nimmit/)"
+    info "Work output will go to ~/workspace/"
     echo ""
 
-    # ── Step 3: Telegram bot ──
-    echo -e "${BOLD}${BLUE}  Step 3/5: Telegram Bot${NC}"
-    echo -e "  ${DIM}Your agent needs a Telegram bot to communicate.${NC}"
+    # ── Step 1: Telegram bot ──
+    echo -e "${BOLD}${BLUE}  Step 1/2: Telegram Bot${NC}"
+    echo -e "  ${DIM}Nimmit needs a Telegram bot to communicate.${NC}"
     echo -e "  ${DIM}Create one at https://t.me/BotFather if you don't have one.${NC}"
     echo ""
 
@@ -257,15 +210,10 @@ interactive_setup() {
 
     echo ""
 
-    # ── Step 4: AI models ──
-    echo -e "${BOLD}${BLUE}  Step 4/5: AI Models${NC}"
-    echo -e "  ${DIM}Your agent needs at least one AI model API key.${NC}"
+    # ── Step 2: AI models ──
+    echo -e "${BOLD}${BLUE}  Step 2/2: AI Models${NC}"
+    echo -e "  ${DIM}Nimmit needs at least one AI model API key.${NC}"
     echo -e "  ${DIM}Models are swappable — you can change them anytime after install.${NC}"
-    echo ""
-    echo -e "  ${DIM}Available providers:${NC}"
-    echo -e "    ${CYAN}1${NC}  Google Gemini  ${DIM}— recommended, get key at https://aistudio.google.com/apikey${NC}"
-    echo -e "    ${CYAN}2${NC}  GitHub Copilot ${DIM}— if you have a Copilot subscription${NC}"
-    echo -e "    ${CYAN}3${NC}  ZAI (GLM)      ${DIM}— alternative provider${NC}"
     echo ""
 
     if [[ -z "$GOOGLE_API_KEY" ]]; then
@@ -273,20 +221,10 @@ interactive_setup() {
         GOOGLE_API_KEY="$REPLY"
     fi
 
-    if [[ -z "$COPILOT_TOKEN" ]]; then
-        ask_secret "GitHub Copilot token (or press Enter to skip)"
-        COPILOT_TOKEN="$REPLY"
-    fi
-
-    if [[ -z "$ZAI_API_KEY" ]]; then
-        ask_secret "ZAI API key (or press Enter to skip)"
-        ZAI_API_KEY="$REPLY"
-    fi
-
     if [[ -z "$GOOGLE_API_KEY" && -z "$COPILOT_TOKEN" && -z "$ZAI_API_KEY" ]]; then
         echo ""
         warn "No API keys provided. Your agent won't be able to respond until you add one."
-        warn "You can add keys later: nano ~/.openclaw/${SLUG}/.env"
+        warn "You can add keys later: nano ~/.openclaw/nimmit/.env"
     fi
 
     # Set primary model based on what keys are available
@@ -300,31 +238,15 @@ interactive_setup() {
 
     echo ""
 
-    # ── Step 5: Options ──
-    echo -e "${BOLD}${BLUE}  Step 5/5: Options${NC}"
-    echo ""
-
-    if ask_yn "Enable all 9 departments?" "n"; then
-        DIVISIONS=true
-    fi
-
-    echo ""
-
     # ── Confirm ──
     echo -e "${BOLD}${MAGENTA}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
-    echo -e "${BOLD}  Review your setup:${NC}"
+    echo -e "${BOLD}  Ready to install Nimmit${NC}"
     echo -e "${MAGENTA}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
     echo ""
     echo -e "  Agent:       ${BOLD}${AGENT_NAME}${NC}"
-    echo -e "  Company:     ${BOLD}${ORG_NAME}${NC}"
-    echo -e "  Owner:       ${BOLD}${OWNER_NAME}${NC} (ID: ${OWNER_ID:-not set})"
-    echo -e "  Timezone:    ${BOLD}${TIMEZONE}${NC}"
     echo -e "  Model:       ${BOLD}${PRIMARY_MODEL}${NC}"
     echo -e "  Bot token:   ${BOLD}$([ -n "$BOT_TOKEN" ] && echo "set" || echo "not set")${NC}"
     echo -e "  Google key:  ${BOLD}$([ -n "$GOOGLE_API_KEY" ] && echo "set" || echo "not set")${NC}"
-    echo -e "  Copilot:     ${BOLD}$([ -n "$COPILOT_TOKEN" ] && echo "set" || echo "not set")${NC}"
-    echo -e "  ZAI key:     ${BOLD}$([ -n "$ZAI_API_KEY" ] && echo "set" || echo "not set")${NC}"
-    echo -e "  Divisions:   ${BOLD}$([ "$DIVISIONS" == true ] && echo "yes (9)" || echo "no")${NC}"
     echo -e "  Install to:  ${BOLD}~/.openclaw/${SLUG}/${NC}"
     echo ""
 
@@ -820,67 +742,23 @@ finalize() {
 
 uninstall() {
     echo -e "${BOLD}${RED}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
-    echo -e "${BOLD}${RED}  Uninstall OpenClaw Agent${NC}"
+    echo -e "${BOLD}${RED}  Uninstalling Nimmit${NC}"
     echo -e "${BOLD}${RED}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
     echo ""
-    echo -e "${YELLOW}This will:${NC}"
-    echo -e "  • Stop and disable all systemd services"
-    echo -e "  • Remove OpenClaw configuration"
-    echo -e "  • Delete the brain directory (~/.openclaw/<slug>/)"
-    echo -e "  • Keep your .env file (for backup) unless you confirm deletion"
-    echo ""
 
-    if ! ask_yn "Continue with uninstall?" "n"; then
-        echo -e "\n  ${DIM}Uninstall cancelled.${NC}\n"
-        exit 0
-    fi
-
-    echo ""
-
-    # Detect existing installations
-    local FOUND=false
-    local DIR="$HOME/.openclaw"
-    if [[ -d "$DIR" ]]; then
-        echo -e "${CYAN}Found installations:${NC}"
-        for d in "$DIR"/*/; do
-            if [[ -d "$d" ]]; then
-                local slug=$(basename "$d")
-                echo -e "  • ${BOLD}$slug${NC} ($d)"
-                FOUND=true
-            fi
-        done
-    fi
-
-    if [[ "$FOUND" == false ]]; then
-        warn "No OpenClaw agent installations found."
-        exit 0
-    fi
-
-    echo ""
-    ask "Enter slug to uninstall (or 'all')" ""
-    local SLUG="$REPLY"
-    [[ "$SLUG" == "all" ]] && SLUG="*"
-
-    echo ""
     step "Stopping services"
 
-    # Stop and disable services for each slug
-    for brain_dir in $DIR/$SLUG; do
-        if [[ ! -d "$brain_dir" ]]; then continue; fi
+    # Stop and disable all services
+    systemctl --user stop nimmit-watchdog.timer 2>/dev/null || true
+    systemctl --user disable nimmit-watchdog.timer 2>/dev/null || true
+    systemctl --user stop openclaw-update.timer 2>/dev/null || true
+    systemctl --user disable openclaw-update.timer 2>/dev/null || true
+    systemctl --user stop openclaw.service 2>/dev/null || true
+    systemctl --user disable openclaw.service 2>/dev/null || true
+    systemctl --user stop xvfb.service 2>/dev/null || true
+    systemctl --user disable xvfb.service 2>/dev/null || true
 
-        local name=$(basename "$brain_dir")
-
-        systemctl --user stop "${name}-watchdog.timer" 2>/dev/null || true
-        systemctl --user disable "${name}-watchdog.timer" 2>/dev/null || true
-        systemctl --user stop openclaw-update.timer 2>/dev/null || true
-        systemctl --user disable openclaw-update.timer 2>/dev/null || true
-        systemctl --user stop openclaw.service 2>/dev/null || true
-        systemctl --user disable openclaw.service 2>/dev/null || true
-        systemctl --user stop xvfb.service 2>/dev/null || true
-        systemctl --user disable xvfb.service 2>/dev/null || true
-
-        ok "Stopped services for $name"
-    done
+    ok "All services stopped"
 
     systemctl --user daemon-reload
     echo ""
@@ -892,60 +770,38 @@ uninstall() {
     rm -f "$SVC_DIR/openclaw.service"
     rm -f "$SVC_DIR/openclaw-update.service"
     rm -f "$SVC_DIR/openclaw-update.timer"
-    for brain_dir in $DIR/$SLUG; do
-        if [[ -d "$brain_dir" ]]; then
-            local name=$(basename "$brain_dir")
-            rm -f "$SVC_DIR/${name}-watchdog.service"
-            rm -f "$SVC_DIR/${name}-watchdog.timer"
-        fi
-    done
+    rm -f "$SVC_DIR/nimmit-watchdog.service"
+    rm -f "$SVC_DIR/nimmit-watchdog.timer"
 
     ok "Service files removed"
     echo ""
 
-    step "Removing brain directories"
+    step "Removing Nimmit brain directory"
 
-    for brain_dir in $DIR/$SLUG; do
-        if [[ ! -d "$brain_dir" ]]; then continue; fi
+    local BRAIN_DIR="$HOME/.openclaw/nimmit"
+    local env_file="$BRAIN_DIR/.env"
 
-        local name=$(basename "$brain_dir")
-        local env_file="$brain_dir/.env"
-
-        # Backup .env if it contains secrets
-        if [[ -f "$env_file" ]]; then
-            local backup="${env_file}.backup.$(date +%s)"
-            cp "$env_file" "$backup"
-            ok "Backed up .env to $backup"
-        fi
-
-        rm -rf "$brain_dir"
-        ok "Removed $name"
-    done
-
-    echo ""
-
-    # Ask about removing OpenClaw itself
-    if ask_yn "Also remove OpenClaw globally?" "n"; then
-        step "Removing OpenClaw"
-        bun pm rm -g openclaw 2>/dev/null || true
-        ok "OpenClaw removed"
+    # Backup .env if it contains secrets
+    if [[ -f "$env_file" ]]; then
+        local backup="${env_file}.backup.$(date +%s)"
+        cp "$env_file" "$backup"
+        ok "Backed up .env to $backup"
     fi
 
+    rm -rf "$BRAIN_DIR"
+    ok "Nimmit brain removed"
     echo ""
 
-    # Ask about removing config
-    if ask_yn "Remove global config at ~/.openclaw/?" "n"; then
-        rm -rf "$HOME/.openclaw"
-        ok "Global config removed"
-    fi
-
+    step "Removing OpenClaw"
+    bun pm rm -g openclaw 2>/dev/null || true
+    ok "OpenClaw removed"
     echo ""
+
     echo -e "${GREEN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
     echo -e "${GREEN}  Uninstall complete${NC}"
     echo -e "${GREEN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
     echo ""
-    echo -e "  ${DIM}Note: .env backup files were preserved.${NC}"
-    echo -e "  ${DIM}To remove them: rm ~/.openclaw/*/.env.backup.*${NC}"
+    echo -e "  ${DIM}Note: .env backup was preserved at ${env_file}.backup.*${NC}"
     echo ""
 }
 
@@ -957,16 +813,25 @@ main() {
         interactive_setup
     fi
 
-    # Set defaults for anything not provided
-    AGENT_NAME="${AGENT_NAME:-Nimmit}"
-    ORG_NAME="${ORG_NAME:-$AGENT_NAME}"
-    SLUG="${SLUG:-$(echo "$AGENT_NAME" | tr '[:upper:]' '[:lower:]' | tr ' ' '-' | tr -cd '[:alnum:]-')}"
-    OWNER_NAME="${OWNER_NAME:-Owner}"
+    # Hardcoded values for Nimmit
+    AGENT_NAME="Nimmit"
+    ORG_NAME="Nimmit"
+    SLUG="nimmit"
+    OWNER_NAME=""
+    OWNER_ID=""
+
+    # Auto-detect timezone
     detect_timezone
+
     BRAIN_DIR="$OPENCLAW_DIR/$SLUG"
     ENV_FILE="$BRAIN_DIR/.env"
 
-    echo -e "\n${BOLD}${GREEN}  Installing ${AGENT_NAME} for ${ORG_NAME}...${NC}\n"
+    # Require bot token in non-interactive mode
+    if [[ "$NON_INTERACTIVE" == true && -z "$BOT_TOKEN" ]]; then
+        die "Non-interactive mode requires --token. Run: bash install.sh --token '123:ABC...'"
+    fi
+
+    echo -e "\n${BOLD}${GREEN}  Installing Nimmit...${NC}\n"
 
     detect_os
     install_deps

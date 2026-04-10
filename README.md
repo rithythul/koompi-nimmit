@@ -19,7 +19,7 @@ A production-ready template for creating AI agents that run on OpenClaw. Each ag
 | **Config templates** | `config/` — OpenClaw config, model settings, division souls |
 | **Skills** | `skills/` — Pre-built skills for web apps, auth, payments |
 | **App templates** | `templates/` — Next.js + Supabase starter |
-| **One-line install** | `install.sh` — Interactive setup wizard |
+| **One-line install** | `install.sh` — Simple setup (bot token + API key) |
 
 ## Quick start
 
@@ -27,23 +27,18 @@ A production-ready template for creating AI agents that run on OpenClaw. Each ag
 curl -fsSL https://raw.githubusercontent.com/koompi/koompi-nimmit/master/install.sh | bash
 ```
 
+Then enter your Telegram bot token when prompted. That's it.
+
 The installer will:
-1. Ask for your agent name, company, and contact info
-2. Set up Telegram bot and AI model credentials
-3. Install OpenClaw runtime
-4. Deploy your agent brain
-5. Start background services
+1. Set up Telegram bot and AI model credentials
+2. Install OpenClaw runtime
+3. Deploy Nimmit brain
+4. Start background services
 
 ### Non-interactive (for CI/automation)
 
 ```bash
-bash install.sh --non-interactive \
-  --name "Atlas" \
-  --org "Acme Corp" \
-  --owner "Jane Doe" \
-  --owner-id "123456789" \
-  --token "123:ABC..." \
-  --google-key "AIza..."
+bash install.sh --non-interactive --token "123:ABC..." [--google-key "AIza..."]
 ```
 
 ## Post-install quick start
