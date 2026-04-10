@@ -17,7 +17,7 @@ A production-ready template for creating AI agents that run on OpenClaw. Each ag
 |-----------|-------------|
 | **Brain template** | `brain/` — Identity, soul, memory structure, agent specializations |
 | **Config templates** | `config/` — OpenClaw config, model settings, division souls |
-| **Skills** | `skills/` — Pre-built skills for web apps, auth, payments |
+| **Skills** | `skills/` — KOOMPI Cloud, Riverbase, Cloud Sync, web apps, auth, payments |
 | **App templates** | `templates/` — Next.js + Supabase starter |
 | **One-line install** | `install.sh` — Simple setup (bot token + API key) |
 
