@@ -1,0 +1,32 @@
+{
+  "name": "@koompi/nimmit",
+  "version": "0.3.0",
+  "description": "Turnkey AI agent template — deploy your own AI team in one command",
+  "bin": {
+    "nimmit": "./bin/nimmit.js"
+  },
+  "keywords": [
+    "ai",
+    "agent",
+    "openclaw",
+    "template",
+    "nimmit",
+    "koompi"
+  ],
+  "license": "Apache-2.0",
+  "repository": "github:koompi/koompi-nimmit",
+  "files": [
+    "brain/",
+    "config/",
+    "skills/",
+    "templates/",
+    "systemd/",
+    "worker/",
+    "setup/",
+    "install.sh",
+    "bin/",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ]
+}
