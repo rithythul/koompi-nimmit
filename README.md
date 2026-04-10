@@ -1,25 +1,27 @@
-# OpenClaw Agent Template
+# {{AGENT_NAME}}
 
-> Set up your own AI team in 5 minutes. A complete template for deploying autonomous AI agents across all business functions.
+> Your AI team in 5 minutes. 8 functional roles, one brain, mesh structure. Runs on OpenClaw.
 
 ## What this is
 
-A production-ready template for creating AI agents that run on OpenClaw. Each agent has:
-- A **brain** with personality, memory, and specialized skills
-- **9 departments** covering all business functions
-- **Autonomous operation** via systemd services
-- **Swappable AI models** — Gemini, Claude, GPT, GLM, or others
-- **Multiple channels** — Telegram, Discord, or API
+A production-ready template for an AI team that runs your company. Not a chatbot — a teammate.
+
+- **8 functional roles:** Strategy, Product, Engineering, Design, DevOps, Growth, Operations, QA
+- **Mesh structure** — roles collaborate directly, not through hierarchy
+- **Autonomous operation** — heartbeat tasks, scheduled work, proactive monitoring
+- **Swappable AI models** — Claude, GPT, Gemini, GLM, or others. Identity persists across switches.
+- **Multi-channel** — Telegram, Discord, or API
+- **Cold standby** — $0 idle cost, roles activate on demand
 
 ## What you get
 
 | Component | Description |
 |-----------|-------------|
-| **Brain template** | `brain/` — Identity, soul, memory structure, agent specializations |
-| **Config templates** | `config/` — OpenClaw config, model settings, division souls |
-| **Skills** | `skills/` — KOOMPI Cloud, Riverbase, Cloud Sync, web apps, auth, payments |
-| **App templates** | `templates/` — Next.js + Supabase starter |
-| **One-line install** | `install.sh` — Simple setup (bot token + API key) |
+| **Brain template** | `brain/` — Personality, memory, roles, company context |
+| **Migration guide** | `MIGRATION-GUIDE.md` — Customize for your company in 5 minutes |
+| **Config templates** | `config/` — OpenClaw config, model settings |
+| **Skills** | `skills/` — Pre-built capabilities (cloud, ecommerce, auth, payments) |
+| **One-line install** | `install.sh` — Set up with bot token + API key |
 
 ## Quick start
 
@@ -27,73 +29,74 @@ A production-ready template for creating AI agents that run on OpenClaw. Each ag
 curl -fsSL https://raw.githubusercontent.com/koompi/koompi-nimmit/master/install.sh | bash
 ```
 
-Then enter your Telegram bot token when prompted. That's it.
+Then enter your Telegram bot token when prompted.
 
-The installer will:
-1. Set up Telegram bot and AI model credentials
-2. Install OpenClaw runtime
-3. Deploy Nimmit brain
-4. Start background services
+The installer sets up OpenClaw, deploys the brain, and starts background services.
 
-### Non-interactive (for CI/automation)
+### Non-interactive (CI/automation)
 
 ```bash
 bash install.sh --non-interactive --token "123:ABC..." [--google-key "AIza..."]
 ```
 
-## Post-install quick start
+## Org Structure
 
-### 1. Start chatting
-Send a message to your Telegram bot:
 ```
-/build a todo app with next.js
+{{OWNER_NAME}} (CEO & Founder)
+└── {{AGENT_NAME}} (AI Team)
+        Strategy
+       ╱        ╲
+  Product      Engineering
+     ╲            ╱
+  Design      DevOps
+       ╲        ╱
+  Growth      Operations
+       ╲        ╱
+        QA
 ```
 
-### 2. Check status
-```bash
-# Is the agent running?
-systemctl --user status openclaw
+**Mesh, not hierarchy.** Roles collaborate directly across all business lines. No product-specific roles — products change, functions endure.
 
-# View live logs
-journalctl --user -u openclaw -f
-```
+### Roles
 
-### 3. Change models (on the fly)
-In chat:
-```
-/model opus
-```
-Switches between Claude, Gemini, GPT-4, etc.
+| Role | Owns |
+|------|------|
+| **Strategy** | Direction, coordination, resource allocation |
+| **Product** | What to build, design, roadmap, specs |
+| **Engineering** | Code, architecture, feature development |
+| **Design** | Brand, UX, visual identity, content design |
+| **DevOps** | Infrastructure, CI/CD, deployments, monitoring |
+| **Growth** | Marketing, sales, partnerships, revenue |
+| **Operations** | Finance, logistics, HR, admin, legal |
+| **QA** | Testing, code review, quality gates |
 
-## Departments
+### Adapting for your company
 
-Your AI agent operates across 9 departments, each with its own SOUL (personality and focus):
+| Company type | Recommended roles |
+|-------------|-------------------|
+| **Solo founder** | All 8 — you're the CEO, AI handles the rest |
+| **Startup** | Product, Engineering, Growth (+ QA when scaling) |
+| **Agency** | Product, Engineering, Design, Growth, Operations |
+| **Enterprise** | All 8 + add specialized roles as needed |
 
-| Department | Focus |
-|-----------|-------|
-| **Build** | Engineering, code, infrastructure |
-| **Product** | Strategy, research, roadmap |
-| **Content** | Writing, video, design |
-| **Growth** | SEO, analytics, paid acquisition |
-| **Revenue** | Sales, partnerships, pricing |
-| **Distribution** | Channels, partnerships, delivery |
-| **Client Success** | Onboarding, support, retention |
-| **Intelligence** | Competitive intel, market analysis |
-| **Ops** | Process, project management |
+## How it works
+
+1. **Task arrives** → identify which role(s) → execute → deliver
+2. **Multi-role tasks** → roles collaborate directly (mesh, not chain)
+3. **Needs CEO** → escalate, don't decide
+4. **Heartbeat** → scheduled checks, proactive monitoring, daily briefs
+5. **Memory** — persistent across sessions. Writes down what matters. Forgets what doesn't.
 
 ## Tech stack
 
 | Component | Technology |
 |-----------|-----------|
-| Runtime | OpenClaw |
-| Webapp framework | Next.js 16+ (via templates) |
-| Database/Auth/Storage | Supabase (via templates) |
-| Primary model | Configurable (default: Gemini 3.1 Pro) |
-| Model routing | OpenClaw — swappable at runtime via /model |
-| Coding model | Claude Code + Copilot sub-agents |
+| Runtime | [OpenClaw](https://github.com/koompi/openclaw) |
+| Coding | Claude Code + Copilot sub-agents |
+| Models | Claude, GPT, Gemini, GLM (swappable at runtime) |
 | Primary channel | Telegram |
 | Language | TypeScript strict |
-| Package manager | Bun (never npm) |
+| Package manager | Bun |
 
 ## Requirements
 
@@ -107,25 +110,23 @@ Your AI agent operates across 9 departments, each with its own SOUL (personality
 ```
 koompi-nimmit/
 ├── install.sh               # One-command setup
+├── MIGRATION-GUIDE.md       # Customize for your company
 ├── brain/                   # AI team brain template
-│   ├── SOUL.md              # Core personality and rules
+│   ├── SOUL.md              # Core personality (7 Rules, Tensions, Anti-Patterns)
 │   ├── IDENTITY.md          # Who you are
-│   ├── AGENTS.md            # Department routing and startup
+│   ├── AGENTS.md            # Org structure and roles
+│   ├── COMPANY.md           # Business context (fill in yours)
+│   ├── USER.md              # Founder profile (fill in yours)
 │   ├── TOOLS.md             # Capabilities and model config
-│   ├── MEMORY.md            # Memory system docs
-│   ├── topics/              # Department-specific souls (9 divisions)
-│   │   ├── build/
-│   │   ├── product/
-│   │   ├── content/
-│   │   ├── growth/
-│   │   ├── revenue/
-│   │   ├── distribution/
-│   │   ├── client-success/
-│   │   ├── intelligence/
-│   │   └── ops/
-│   ├── agents/              # Specialist agent definitions
-│   │   ├── ROUTING.md       # Task routing rules
-│   │   └── ROSTER.md        # Agent roster
+│   ├── WORKFLOW.md          # Memory and task system
+│   ├── HEARTBEAT.md         # Scheduled tasks and health checks
+│   ├── BOOTSTRAP.md         # First-run setup
+│   ├── MEMORY.md            # Memory index
+│   ├── ARCHITECTURE.md      # Runtime self-awareness
+│   ├── agents/              # Role routing and roster
+│   │   ├── README.md        # Quick reference
+│   │   ├── ROUTING.md       # Task → role → model routing
+│   │   └── ROSTER.md        # Role definitions
 │   └── memory/              # Memory directory structure
 │       ├── daily/
 │       ├── semantic/
@@ -139,46 +140,31 @@ koompi-nimmit/
 ├── config/                  # Configuration templates
 │   ├── openclaw.template.json
 │   ├── models.json
-│   ├── divisions/           # Division SOUL templates
-│   └── claude-code/         # Claude Code settings
+│   └── claude-code/
 ├── skills/                  # Pre-built skills
 ├── templates/               # App templates
 ├── systemd/                 # Service files
 └── README.md
 ```
 
-
 ## Troubleshooting
 
 | Issue | Solution |
 |-------|----------|
-| Bot doesn't respond | 1. Check service: `systemctl --user status openclaw`<br>2. Check logs: `journalctl --user -u openclaw -n 50`<br>3. Verify bot token in `~/.openclaw/<slug>/.env` |
-| "Permission denied" errors | Run: `loginctl enable-linger $USER` then reboot |
-| Node not found after install | Restart shell or run: `source ~/.bashrc` (nvm needs PATH update) |
-| Port 18789 already in use | Something else is using the gateway port. Check: `lsof -i :18789` |
-| Agent forgets context | Check disk space: `df -h ~/.openclaw/`. Memory fills up over time. |
-| Model returns errors | Verify API keys in `.env` file. Try `/model <different-model>` in chat. |
-| Services stop on logout | Run: `sudo loginctl enable-linger $USER` |
+| Bot doesn't respond | `systemctl --user status openclaw` then check logs |
+| "Permission denied" | `loginctl enable-linger $USER` then reboot |
+| Port 18789 in use | `lsof -i :18789` |
+| Agent forgets context | Check disk: `df -h ~/.openclaw/` |
+| Model errors | Verify API keys. Try `/model <different>` in chat |
 
 ### Get help
-- Check logs: `journalctl --user -u openclaw -b`
-- Open an issue: https://github.com/koompi/koompi-nimmit/issues
-- OpenClaw docs: https://github.com/koompi/openclaw
+- Issues: https://github.com/koompi/koompi-nimmit/issues
+- OpenClaw docs: https://docs.openclaw.ai
 
 ## Upgrading
 
-Your agent auto-updates OpenClaw every 6 hours via `openclaw-update.timer`.
-
-### Manual upgrade
 ```bash
 bun install -g openclaw
-systemctl --user restart openclaw
-```
-
-### Upgrade brain template
-```bash
-cd ~/.openclaw/<slug>
-git pull origin master
 systemctl --user restart openclaw
 ```
 
