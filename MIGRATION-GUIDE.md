@@ -25,25 +25,17 @@ This guide walks you through customizing the {{AGENT_NAME}} brain template for y
 
 4. **Verify** — send a message to your AI team
 
-## Org Structure
+## Choosing Your Product Tier
 
-The default is 8 functional roles in a mesh structure:
+| Tier | Who | Setup |
+|------|-----|-------|
+| **Nimmit Cloud** | Startups, agencies, SMBs | Sign up at nimmit.koompi.cloud. No install needed. |
+| **Nimmit Mini** | Government, schools, offline orgs | KOOMPI Mini pre-loaded. Plug in, configure channels. |
+| **Nimmit Enterprise** | Large orgs, ministries | Custom deployment. Contact KOOMP. |
 
-```
-{{OWNER_NAME}} (CEO)
-└── {{AGENT_NAME}} (AI Team)
-        Strategy
-       ╱        ╲
-  Product      Engineering
-     ╲            ╱
-  Design      DevOps
-       ╲        ╱
-  Growth      Operations
-       ╲        ╱
-        QA
-```
+This guide covers **Nimmit Mini / self-hosted** setup. For Cloud, see the web dashboard.
 
-### Adapting for Your Company
+## Adapting Roles for Your Company
 
 **Startup (3 roles):**
 Keep Product, Engineering, Growth. Fold Design into Product, DevOps into Engineering, Operations into Growth. Add Strategy and QA when you scale.
