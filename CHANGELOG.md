@@ -8,10 +8,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- Multi-agent coordination protocol (shared workspace, handoff system, proposal system)
+- Token optimization: git-log-first pattern, heartbeat deduplication, delta reads
+- Shared heartbeat.json for agent status awareness
+- STANDARDS.md — quality and process standards
+- Brain export roadmap for productization
+
+### Changed
+- Repo renamed from `koompi-nimmit` to `nimmit-brain`
+- README rewritten with multi-agent docs, memory architecture, evolution section
+- Updated all repo references from koompi/koompi-nimmit to koompi/nimmit-brain
+
+### Previous (3.2.0)
 - Quick Start section to README
 - Troubleshooting section with common issues and solutions
-- Screenshots placeholder section
-- Upgrade path documentation
 - `.env.example` file for configuration reference
 - `CONTRIBUTING.md` with contribution guidelines
 - `SECURITY.md` with security policy and vulnerability reporting
@@ -20,6 +30,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - GitHub workflow for shellcheck and markdown linting
 - Uninstall function in install.sh
 - Docker Compose configuration for local testing
+- Interactive installation wizard
+- Non-interactive mode for CI/automation
+- Auto-update timer (every 6 hours)
+- Watchdog health check (every 5 minutes)
+- Support for multiple AI model providers
+- Division mode (4 departments: build, product, growth, ops)
+- KOOMPI Mini autologin support
+- Migrated to OpenClaw v3.x
 
 ## [3.2.0] - 2025-04-XX
 
