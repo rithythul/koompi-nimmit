@@ -2,41 +2,39 @@
 
 ## Every Heartbeat
 
-### 0. Task Scan
-- Read `tasks/TASKS.md` — active tasks: next action due? blocked >2 days? stale >3 days?
-- Do the work or flag. Don't just report.
+### 0. Workspace Sync (NON-NEGOTIABLE)
+- `cd ~/workspace/nimmit-workspace && git pull --quiet`
+- Check `handoff/` — process messages, respond to proposals
+- Update `status/heartbeat.json` with my timestamp
+- Push if changes made
 
-### 1. Daily Ops Brief (once per day, before 8am)
+### 1. Daily Ops Brief (once/day, before 8am)
 - Read `projects/README.md` + `tasks/TASKS.md`
-- Post 3-line brief: shipped | blocked/stale | due today
-- Nothing changed → silence. Track in `memory/heartbeat-state.json`.
+- Post 3-line brief: shipped | blocked | due today
+- Nothing changed → silence.
 
-### 2. Role Health Check (every 6 hours)
-- **Strategy:** Conflicting priorities? Resource allocation needed?
-- **Product:** Stale specs? Unprioritized backlog?
-- **Engineering:** Failed deploys? Blocked work?
-- **Design:** Brand inconsistencies? Outdated assets?
-- **DevOps:** Services down? CI failures?
-- **Growth:** Content gaps? Stale partnerships?
-- **Operations:** Overdue invoices? Process failures?
-- **QA:** Bugs slipping? No test coverage on critical paths?
-- Flag to {{OWNER_NAME}}. Done projects → write outcome, archive.
+### 2. Role Health Check (every 6h)
+- See `memory/procedural/role-health-check.md`
 
 ### 3. Group Scan
-- Review last 2 hours across channels. Answer unanswered questions.
+- Review last 2h across channels. Answer unanswered. Flag Rithy items.
 
 ### 4. Scheduled Tasks
-- **Mon 9am:** Competitive intel → `memory/episodic/competitive-intel-YYYY-MM-DD.md`
-- **Tue-Sat 9am:** Daily metric check. Surface one insight.
-- **Sun 10am:** Evolution scorecard
-- **Sun 11am:** Weekly failure review. Same pattern 3+ times → update config.
-- **1st of month 10am:** Monthly outcome review.
-- Track via `memory/heartbeat-state.json`.
+- **Daily 09:00:** Intel Brief → `koompi/nimmit-intel-briefs` (Signal → Landscape → Intel → Actions)
+- **Mon 10:00:** Competitive intel → `memory/episodic/competitive-intel-YYYY-MM-DD.md`
+- **Tue-Sat 09:30:** Metric check. Surface one insight.
+- **Sun 10:00:** Evolution scorecard
+- **Sun 11:00:** Weekly failure review. Pattern 3x → update config.
+- **1st of month 10:00:** Monthly outcome review.
 
 ### 5. NOW.md + Commitments
-- NOW.md >24h old → update. Commitments overdue → act or escalate.
+- NOW.md >24h old → update. Overdue → act or escalate.
+
+### 6. Token Efficiency
+- Skip files already in context. Skip re-checks koompi_dev did.
+- Flag waste patterns to `memory/failures/token-waste.md`
 
 ## Rules
 - Nothing needs attention → `HEARTBEAT_OK`
-- Late night (23:00-08:00): skip except urgent escalations
+- Late night (23:00-08:00): skip except urgent
 - Every scheduled task MUST produce visible output. No evidence = didn't run.
