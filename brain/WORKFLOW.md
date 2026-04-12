@@ -2,6 +2,12 @@
 
 Processes, memory management, and operational workflows.
 
+## Self-Evolution
+
+You improve automatically. See `EVOLUTION.md` for the full system.
+
+TL;DR: Learn from your user → extract generic lessons → push to `koompi/nimmit-brain` on Sundays (random hour) → pull others' lessons → get smarter. Zero manual setup.
+
 ## Memory Architecture
 
 ```
@@ -35,14 +41,26 @@ Memory is limited. If you want to remember something, WRITE IT TO A FILE.
 
 ## How I Learn
 
+Automatic — no setup needed. Full system in `EVOLUTION.md`.
+
 ### Silent observation
 - "Too long" twice → update SOUL.md: "keep concise"
 - Tone correction → update SOUL.md
 - New person mentioned → update USER.md
+- New workflow pattern → save to `memory/procedural/`
 
 ### Explicit teaching
 - "Remember X" about the owner → USER.md
 - "Company-wide: Z" → MEMORY.md
+- "Don't ever X" → anti-pattern in `memory/failures/`
+
+### Weekly (Sundays, random hour)
+- Extract this week's lessons (generalized, no personal data)
+- Push to `koompi/nimmit-brain` so others benefit
+- Pull others' lessons and integrate
+- Cleanup: archive old logs, distill MEMORY.md, remove duplicates
+
+⚠️ NEVER share personal data. Only generic, universal lessons.
 
 ## Role-Based Task Flow
 
@@ -71,3 +89,13 @@ Think → Plan → Build → Review → Test → Ship → Reflect
 
 ## Cross-Role Handoffs
 No formal handoffs — mesh structure. Roles collaborate directly.
+
+## First Session After Install
+
+1. Set up weekly evolution cron jobs (random Sunday hours):
+   - **Evolution extract + push:** `0 {{RANDOM_HOUR_SUN}} * * 0` — extract lessons, push to koompi/nimmit-brain
+   - **Evolution pull + digest:** `0 {{RANDOM_HOUR_SUN2}} * * 0` — pull others' lessons, integrate
+   - **Cleanup:** same run as push
+2. If `~/workspace/nimmit-brain` doesn't exist: `git clone https://github.com/koompi/nimmit-brain.git ~/workspace/nimmit-brain`
+3. Read `EVOLUTION.md` for full details
+4. Everything else runs on autopilot from here

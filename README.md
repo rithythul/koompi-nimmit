@@ -13,7 +13,7 @@ Not a chatbot. Not a coding tool. An AI teammate that handles ops, growth, finan
 - **Message-native** — your team works via Telegram, Discord, WhatsApp, or Slack. No dashboards needed.
 - **Autonomous** — heartbeat tasks, scheduled work, proactive monitoring. It works while you sleep.
 - **Multi-agent** — two or more agents share one brain, cover each other's blind spots, and collaborate.
-- **Memory that compounds** — learns from decisions, failures, and outcomes. Gets smarter every week.
+- **Self-evolving** — learns from you AND from every other Nimmit user. Weekly lesson sharing. Everyone gets smarter.
 - **Swappable models** — Claude, GPT, Gemini, GLM. Identity persists across switches.
 - **Cold standby** — $0 idle cost. Roles activate on demand.
 
