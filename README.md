@@ -83,7 +83,7 @@ See [`brain/EVOLUTION.md`](brain/EVOLUTION.md) for the full self-improvement sys
 ## Quick Start
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/koompi/nimmit-brain/master/install.sh | bash
+curl -fsSL https://brain.nimmit.xyz/brain/install | bash
 ```
 
 ### What You Get
