@@ -56,21 +56,52 @@ When extracting a lesson, strip ALL personal context. Generalize everything.
 5. Stage generalized lessons for push
 
 ### Step 2: Push to koompi/nimmit-brain
-1. `cd ~/workspace/nimmit-brain && git pull`
-2. Copy generalized lessons to `brain/memory/procedural/`, `brain/memory/semantic/`
-3. Update `brain/CHANGELOG.md` with summary
-4. Bump `brain/VERSION` (patch for fixes, minor for new lessons)
-5. `git add -A && git commit && git push`
+
+**No GitHub account needed.** POST lessons to the API:
+
+```bash
+curl -X POST https://nimmit.koompi.ai/api/v1/brain/lessons \
+  -H "Content-Type: application/json" \
+  -d '{
+    "brainVersion": "<current version>",
+    "lessons": [
+      {
+        "category": "procedural|semantic|workflow|anti-pattern",
+        "name": "Lesson Name",
+        "trigger": "When does this apply?",
+        "lesson": "What should the agent do?",
+        "source": "Generic description — no personal data"
+      }
+    ]
+  }'
+```
+
+The API:
+- Validates lesson format
+- **Blocks personal data** (emails, phones, IPs, tokens, names)
+- Auto-creates a GitHub PR to `koompi/nimmit-brain`
+- Returns confirmation with commit details
+
+If you DO have GitHub: fork + PR also works. See `CONTRIBUTING.md`.
 
 ### Step 3: Pull Others' Lessons
-1. `cd ~/workspace/nimmit-brain && git pull`
-2. Review new commits since last pull
-3. For each merged lesson:
+
+**No GitHub account needed.** Fetch from the API:
+
+```bash
+curl https://nimmit.koompi.ai/api/v1/brain/lessons?since=2026-04-05
+```
+
+Then:
+1. Review each lesson from the response
+2. For each useful lesson:
    - Procedural → integrate into your `memory/procedural/`
    - Semantic → integrate into your `memory/semantic/`
    - Workflow → update relevant brain files if applicable
-4. Check for conflicts with your existing patterns
-5. New useful pattern → adopt. Conflicting → keep yours, note the alternative.
+3. Check for conflicts with your existing patterns
+4. New useful pattern → adopt. Conflicting → keep yours, note the alternative.
+
+If you have GitHub: `git pull` on `~/workspace/nimmit-brain` also works.
 
 ### Step 4: Cleanup
 1. Archive daily logs older than 30 days
