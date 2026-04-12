@@ -60,7 +60,7 @@ When extracting a lesson, strip ALL personal context. Generalize everything.
 **No GitHub account needed.** POST lessons to the API:
 
 ```bash
-curl -X POST https://brain.nimmit.xyz/api/v1/brain/lessons \
+curl -X POST https://nimmit.koompi.ai/api/v1/brain/lessons \
   -H "Content-Type: application/json" \
   -d '{
     "brainVersion": "<current version>",
@@ -89,7 +89,7 @@ If you DO have GitHub: fork + PR also works. See `CONTRIBUTING.md`.
 **No GitHub account needed.** Fetch from the API:
 
 ```bash
-curl https://brain.nimmit.xyz/api/v1/brain/lessons?since=2026-04-05
+curl https://nimmit.koompi.ai/api/v1/brain/lessons?since=2026-04-05
 ```
 
 Then:

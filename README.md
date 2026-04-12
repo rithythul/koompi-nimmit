@@ -43,7 +43,7 @@ Nimmit learns: your corrections, patterns, domain knowledge
 Sunday: extracts generic lessons, strips ALL personal data
         │
         ▼
-POSTs to brain.nimmit.xyz/api/v1/brain/lessons
+POSTs to nimmit.koompi.ai/api/v1/brain/lessons
         │
         ▼
 API validates → blocks personal data → creates PR to this repo
@@ -83,7 +83,7 @@ See [`brain/EVOLUTION.md`](brain/EVOLUTION.md) for the full self-improvement sys
 ## Quick Start
 
 ```bash
-curl -fsSL https://brain.nimmit.xyz/brain/install | bash
+curl -fsSL https://nimmit.koompi.ai/brain/install | bash
 ```
 
 ### What You Get
@@ -174,7 +174,7 @@ Memory compounds. The longer your team runs, the more context it has. And with s
 | Runtime | [OpenClaw](https://github.com/openclaw/openclaw) (MIT) |
 | Coding agents | Claude Code, Copilot sub-agents |
 | Models | Claude, GPT, Gemini, GLM (swappable) |
-| Evolution API | [brain.nimmit.xyz](https://brain.nimmit.xyz) (Cloudflare Workers) |
+| Evolution API | [nimmit.koompi.ai](https://nimmit.koompi.ai) (Cloudflare Workers) |
 | Channels | Telegram, Discord, WhatsApp, Slack |
 | Language | TypeScript strict |
 | Package manager | Bun |
@@ -226,7 +226,7 @@ The API that powers self-evolution. No GitHub account needed.
 
 ```bash
 # Submit a lesson
-curl -X POST https://brain.nimmit.xyz/api/v1/brain/lessons \
+curl -X POST https://nimmit.koompi.ai/api/v1/brain/lessons \
   -H "Content-Type: application/json" \
   -d '{
     "brainVersion": "2.1.0",

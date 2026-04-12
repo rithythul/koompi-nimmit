@@ -6,7 +6,7 @@
 - **EVOLUTION.md** — Full self-improvement system baked into the brain
   - Auto-learn from corrections, work, observations
   - Weekly lesson extraction (generalized, no personal data)
-  - Push lessons to `brain.nimmit.xyz/api/v1/brain/lessons`
+  - Push lessons to `nimmit.koompi.ai/api/v1/brain/lessons`
   - Pull others' lessons and integrate
   - Privacy contract: only generic lessons shared, never personal data
 - **WORKFLOW.md** — Evolution triggers integrated into daily workflow
@@ -16,7 +16,7 @@
   - Sunday random hour: push + pull cycle
 
 ### New: Brain Lesson API
-- **brain.nimmit.xyz** — Crowd-sourced lesson aggregation API
+- **nimmit.koompi.ai** — Crowd-sourced lesson aggregation API
   - `POST /api/v1/brain/lessons` — submit lessons (no GitHub needed)
   - `GET /api/v1/brain/lessons` — fetch community lessons
   - Privacy enforcement: blocks emails, phones, IPs, tokens, names
