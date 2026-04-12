@@ -1,75 +1,53 @@
-# Contributing to koompi-nimmit
+# Contributing to nimmit-brain
 
-Thank you for considering contributing to KOOMPI Nimmit!
+**nimmit-brain** is a turnkey AI brain template by KOOMPI. Fork it, customize it, run your own AI team — or contribute improvements back for everyone.
 
 ## How to Contribute
 
-### Reporting Bugs
+1. Fork `koompi/nimmit-brain`
+2. Create a feature branch: `git checkout -b my-improvement`
+3. Make your changes
+4. Open a PR with the required template filled out
+5. Nimmit reviews weekly. Merged or feedback given.
 
-1. Check existing issues first
-2. Use the bug report template
-3. Include:
-   - OS and version
-   - Install method (interactive vs non-interactive)
-   - Full error messages
-   - Steps to reproduce
+## What's Welcome
 
-### Suggesting Features
+| Category | Path | Examples |
+|----------|------|----------|
+| Procedural patterns | `brain/memory/procedural/` | Debugging flows, deployment checklists |
+| Domain knowledge | `brain/memory/semantic/` | Industry docs, technical references |
+| Workflow improvements | `brain/WORKFLOW.md`, `scripts/` | Automation, process refinements |
+| Bug fixes | Any brain file | Typos, broken references, logic errors |
+| New memory archetypes | `brain/memory/` | New file types, novel structures |
 
-1. Check existing issues and feature requests
-2. Use the feature request template
-3. Describe the use case clearly
-4. Consider if it fits the project's scope
+## What's NOT Accepted
 
-### Submitting Code
+- **SOUL.md / IDENTITY.md changes** — core personality is non-negotiable
+- **Approval gate changes** — security boundary, only KOOMPI internal
+- **Credentials, tokens, IPs, secrets** — never
+- **Vendor lock-in** — patterns must work across providers
+- **Unexplained changes** — every PR must include the lesson learned
 
-1. Fork the repository
-2. Create a branch: `git checkout -b feature/your-feature`
-3. Follow the code style below
-4. Commit with conventional commits: `feat:`, `fix:`, `docs:`, `test:`, `chore:`
-5. Push to your fork
-6. Open a pull request
+## PR Format
 
-## Code Style
+- **One change per PR.** Keeps reviews focused.
+- Explain the lesson: what scenario taught you this?
+- Reference the real-world context.
+- Use the PR template (auto-loaded when you open a PR).
 
-### Shell scripts
-- Use `shellcheck` for linting
-- Follow the existing style in `install.sh`
-- Use `set -euo pipefail`
-- Quote all variables
+## Review Process
 
-### Markdown
-- Use `markdownlint` for linting
-- Keep lines under 80 characters
-- Use proper heading hierarchy
+1. Automated checks: restricted file detection, formatting
+2. Nimmit reviews weekly batch
+3. Merge, request changes, or close with explanation
+4. Major changes may land in a minor version bump
 
-## Testing
+## Style
 
-Test your changes:
-```bash
-# Shellcheck
-shellcheck install.sh
+- KOOMPI: 2 O's, 2 P's. Nimmit: 2 M's, 2 T's.
+- Markdown, 80-char lines where practical
+- Concise > verbose
 
-# Markdown lint
-markdownlint README.md CONTRIBUTING.md
+## Questions?
 
-# Test install (dry-run)
-bash install.sh --help
-```
-
-## Project Structure
-
-```
-koompi-nimmit/
-├── install.sh          # Main installer
-├── brain/              # AI brain template
-├── config/             # Configuration templates
-├── skills/             # User-facing skills
-├── systemd/            # Service files
-├── templates/          # App templates
-└── worker/             # Background workers
-```
-
-## License
-
-By contributing, you agree that your contributions will be licensed under the Apache License 2.0.
+Open an issue with the `question` label.
