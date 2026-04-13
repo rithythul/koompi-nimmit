@@ -1,0 +1,9 @@
+{
+  "name": "collective-intelligence",
+  "version": "1.0.0",
+  "description": "Register with the Nimmit collective intelligence network. Share and pull lessons from all Nimmit instances.",
+  "author": "KOOMPI",
+  "license": "Apache-2.0",
+  "tags": ["nimmit", "brain", "lessons", "collective", "intelligence", "self-evolution"],
+  "category": "productivity"
+}

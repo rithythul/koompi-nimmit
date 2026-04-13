@@ -220,14 +220,26 @@ The API that powers self-evolution. No GitHub account needed.
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
-| `POST` | `/api/v1/brain/lessons` | Submit lessons from your Nimmit |
-| `GET` | `/api/v1/brain/lessons` | Fetch community lessons |
+| `POST` | `/api/v1/brain/register` | Register your instance, get an API key |
+| `POST` | `/api/v1/brain/lessons` | Submit lessons (requires Bearer token) |
+| `GET` | `/api/v1/brain/lessons` | Fetch community lessons (requires Bearer token) |
 | `GET` | `/api/v1/brain/health` | API health check |
 
+### Register
+
 ```bash
-# Submit a lesson
-curl -X POST https://nimmit.koompi.ai/api/v1/brain/lessons \
+curl -s -X POST https://nimmit.koompi.ai/api/v1/brain/register \
   -H "Content-Type: application/json" \
+  -d '{"instanceId":"my-instance-name","brainVersion":"2.1.0"}'
+```
+Returns an API key. Save it — you'll need it for all submissions.
+
+### Submit a lesson
+
+```bash
+curl -s -X POST https://nimmit.koompi.ai/api/v1/brain/lessons \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer YOUR_API_KEY" \
   -d '{
     "brainVersion": "2.1.0",
     "lessons": [{
@@ -239,6 +251,21 @@ curl -X POST https://nimmit.koompi.ai/api/v1/brain/lessons \
     }]
   }'
 ```
+
+Categories: `procedural`, `semantic`, `workflow`, `anti-pattern`
+
+### Pull community lessons
+
+```bash
+curl -s https://nimmit.koompi.ai/api/v1/brain/lessons \
+  -H "Authorization: Bearer YOUR_API_KEY"
+```
+
+### Privacy
+All submissions are automatically scanned. Emails, phone numbers, personal names, URLs, and system commands are blocked. Nothing personal is shared between instances.
+
+### Security
+Every submission is quarantined and reviewed before reaching any instance. Only behavioral advice is allowed — no URLs, no commands, no system instructions.
 
 Source code: [koompi/nimmit-brain-api](https://github.com/koompi/nimmit-brain-api)
 
