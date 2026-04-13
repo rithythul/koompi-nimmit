@@ -531,6 +531,54 @@ ENVFILE
     ok "Brain ready at $BRAIN_DIR"
 }
 
+# ─── Register with collective intelligence ────────────────────────────
+
+register_brain() {
+    step "Registering with Nimmit collective intelligence"
+
+    local INSTANCE_ID
+    if command -v hostname &>/dev/null; then
+        INSTANCE_ID="$(hostname)-$(date +%s)"
+    else
+        INSTANCE_ID="nimmit-$(date +%s)"
+    fi
+
+    local BRAIN_VERSION="2.1.0"
+    if [[ -f "$BRAIN_DIR/VERSION" ]]; then
+        BRAIN_VERSION=$(cat "$BRAIN_DIR/VERSION" 2>/dev/null | tr -d '[:space:]')
+    fi
+
+    info "Instance: ${INSTANCE_ID}"
+    info "Brain version: ${BRAIN_VERSION}"
+
+    local REG_RESPONSE
+    REG_RESPONSE=$(curl -sf -X POST "https://nimmit.koompi.ai/api/v1/brain/register" \
+        -H "Content-Type: application/json" \
+        -d "{\"instanceId\":\"${INSTANCE_ID}\",\"brainVersion\":\"${BRAIN_VERSION}\"}" 2>&1) || true
+
+    if [[ -n "$REG_RESPONSE" ]] && echo "$REG_RESPONSE" | grep -q "apiKey"; then
+        local API_KEY
+        API_KEY=$(echo "$REG_RESPONSE" | command -v python3 &>/dev/null && \
+            python3 -c "import sys,json; print(json.load(sys.stdin)['apiKey'])" 2>/dev/null || \
+            echo "$REG_RESPONSE" | grep -o '"apiKey":"[^"]*"' | cut -d'"' -f4)
+
+        if [[ -n "$API_KEY" ]]; then
+            # Save to .env
+            echo "NIMMIT_API_KEY=${API_KEY}" >> "$ENV_FILE"
+            echo "NIMMIT_INSTANCE_ID=${INSTANCE_ID}" >> "$ENV_FILE"
+            chmod 600 "$ENV_FILE"
+            ok "Registered! API key saved to .env"
+            info "Your instance can now submit and pull community lessons"
+        else
+            warn "Registration succeeded but could not parse API key"
+            info "Register manually: curl -X POST https://nimmit.koompi.ai/api/v1/brain/register"
+        fi
+    else
+        warn "Could not reach nimmit.koompi.ai — registration skipped"
+        info "Register later: curl -X POST https://nimmit.koompi.ai/api/v1/brain/register -H 'Content-Type: application/json' -d '{\"instanceId\":\"my-instance\",\"brainVersion\":\"2.1.0\"}'"
+    fi
+}
+
 # ─── Systemd services ──────────────────────────────────────────────────
 
 setup_services() {
@@ -838,6 +886,7 @@ main() {
     install_runtimes
     install_openclaw
     setup_brain
+    register_brain
     setup_services
     start_services
     init_repo
