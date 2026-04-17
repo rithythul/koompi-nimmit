@@ -1,43 +1,57 @@
-# Memory Index
+# MEMORY.md — Long-Term Index
 
-{{AGENT_NAME}}'s knowledge base. Updated continuously.
-
-## Structure
-
+## Memory Architecture
 ```
 memory/
-├── semantic/      — What things are
-├── procedural/    — How to do things
-├── decisions/     — Why we decided
-├── failures/      — What went wrong
-├── episodic/      — What happened (daily logs)
-├── working/       — Current project state
-├── research/      — Research archives
-└── outcomes/      — Results tracking
+├── daily/          # Daily logs (one per day)
+├── semantic/       # What things are (products, team, tech, business)
+├── procedural/     # How to do things (deploy, new project, learn from corrections)
+├── decisions/      # Why we decided (monthly decision logs)
+├── failures/       # What failed (known-issues.md, lessons-log.md)
+├── episodic/       # What happened when (events, competitive intel)
+├── outcomes/       # Project outcomes and deliverables
+├── research/       # Research notes and analysis
+└── working/        # Current project state (NOW.md lives here)
 ```
 
-## How to Use
+### Memory Type Decision Tree
+| Content type | Destination |
+|--------------|-------------|
+| What X is (products, people, tech) | semantic/ |
+| How to do X (deploy, configure, fix) | procedural/ |
+| Why we decided X | decisions/ |
+| What happened when (events, intel) | episodic/ |
+| What failed and why | failures/ |
+| Analysis of X (research, comparisons) | research/ |
+| Project state (current tasks) | working/ |
+| Project results | outcomes/ |
+| Daily activity log | daily/ |
 
-### Writing Memory
-- File naming: `YYYY-MM-DD-topic.md` for time-based, `topic.md` for evergreen
-- Always include context (why, not just what)
-- Cross-reference related files
-- Tag with department: `[build]`, `[product]`, `[content]`, `[growth]`, `[revenue]`, `[ops]`
+## Projects
+See `projects/README.md` for active projects.
 
-### Reading Memory
-- Check `working/` first for current state
-- Check `decisions/` before making similar decisions
-- Check `failures/` before attempting something that might have failed before
-- Check `procedural/` for how-to on recurring tasks
+## Repositories
+- `rithythul/koompi-claw` — Nimmit's brain (internal)
+- `koompi/nimmit-brain` — Product template (client-facing)
 
-### Pruning Memory
-- During daily consolidation, archive or delete outdated items
-- Move completed `working/` items to `outcomes/`
-- Compress `episodic/` entries older than 30 days
+## Key Context
+- **Architecture:** Nimmit = identity + brain files. OpenClaw = runtime. Models = swappable engines.
+- **Coding:** OpenClaude first → Copilot → Claude Code
+- **KOOMPI business:** Cloud, Nimmit.ai, Enterprise, Hardware, Claw. See `memory/semantic/koompi-business-structure.md`
+- **Access:** DMs open (gated), groups whitelist-only. New users → Rithy for approval.
 
-## Index
+## Key Lessons
+- Communication: short, concise, direct. "Got it." then fix.
+- Bun not npm. TypeScript strict. Always.
+- Code → `~/workspace/<project>/` | Brain → `~/.openclaw/nimmit/` | Secrets → `~/.secrets/`
+- You CAN be proactive — use cron.
+- Execute approved plans without re-asking.
+- Khmer content must be reviewed by native speaker (Rithy) before shipping. Tag with '🇰🇭 review needed'. If unavailable, use English + note 'pending Khmer translation'.
+- SQLite brain at `~/.openclaw/nimmit/brain.db` for structured queries.
 
-<!-- Add entries as memory grows. Format: -->
-<!-- - [category/filename.md] — Brief description -->
-
-(Empty — populate as {{AGENT_NAME}} learns)
+### Context Budget (per session)
+- NOW.md + TASKS.md: always load (~2000 tokens)
+- Daily logs: last 3 days only (~3000 tokens)
+- Semantic memory: lazy load by topic (~1000 tokens each)
+- Role context: only for active role (~500 tokens)
+- Trim oldest first. Target: <50k tokens per task.
