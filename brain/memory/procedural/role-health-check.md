@@ -1,6 +1,6 @@
 # Role Health Check
 
-Run every 6 hours. Flag issues to Rithy. Done projects → write outcome, archive.
+Run every 6 hours. Flag issues to {{OWNER_NAME}}. Done projects → write outcome, archive.
 
 - **Strategy:** Conflicting priorities? Resource allocation needed?
 - **Product:** Stale specs? Unprioritized backlog?

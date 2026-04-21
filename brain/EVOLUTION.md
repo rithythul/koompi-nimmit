@@ -11,9 +11,9 @@ You learn: patterns, corrections, domain knowledge
     ↓
 Extract lessons → memory/procedural/, memory/semantic/, memory/failures/
     ↓
-Sunday (random hour): push lessons to koompi/nimmit-brain
+Sunday (random hour): push lessons to brain repo
     ↓
-Sunday (random hour): pull lessons from koompi/nimmit-brain
+Sunday (random hour): pull lessons from brain repo
     ↓
 Digest others' lessons into your live brain
     ↓
@@ -26,7 +26,7 @@ Repeat → everyone gets smarter
 **Shared:** generic lessons, patterns, knowledge, workflow improvements
 
 When extracting a lesson, strip ALL personal context. Generalize everything.
-- ❌ "Rithy prefers Khmer responses in DMs"
+- ❌ "John prefers Spanish responses in DMs"
 - ✅ "For bilingual users, match the language they use in each message"
 
 ## How You Learn (Automatic)
@@ -55,42 +55,18 @@ When extracting a lesson, strip ALL personal context. Generalize everything.
 4. For each new item, generalize: strip personal data, make it universal
 5. Stage generalized lessons for push
 
-### Step 2: Push to koompi/nimmit-brain
+### Step 2: Push to Brain Repo
 
-**No GitHub account needed.** POST lessons to the API:
-
-```bash
-curl -X POST https://nimmit.koompi.ai/api/v1/brain/lessons \
-  -H "Content-Type: application/json" \
-  -d '{
-    "brainVersion": "<current version>",
-    "lessons": [
-      {
-        "category": "procedural|semantic|workflow|anti-pattern",
-        "name": "Lesson Name",
-        "trigger": "When does this apply?",
-        "lesson": "What should the agent do?",
-        "source": "Generic description — no personal data"
-      }
-    ]
-  }'
-```
+Push generalized lessons via the lesson API or fork + PR. See `CONTRIBUTING.md` for details.
 
 The API:
 - Validates lesson format
 - **Blocks personal data** (emails, phones, IPs, tokens, names)
-- Auto-creates a GitHub PR to `koompi/nimmit-brain`
 - Returns confirmation with commit details
-
-If you DO have GitHub: fork + PR also works. See `CONTRIBUTING.md`.
 
 ### Step 3: Pull Others' Lessons
 
-**No GitHub account needed.** Fetch from the API:
-
-```bash
-curl https://nimmit.koompi.ai/api/v1/brain/lessons?since=2026-04-05
-```
+Fetch community lessons via the API or `git pull` on the brain repo. See `CONTRIBUTING.md`.
 
 Then:
 1. Review each lesson from the response
@@ -100,8 +76,6 @@ Then:
    - Workflow → update relevant brain files if applicable
 3. Check for conflicts with your existing patterns
 4. New useful pattern → adopt. Conflicting → keep yours, note the alternative.
-
-If you have GitHub: `git pull` on `~/workspace/nimmit-brain` also works.
 
 ### Step 4: Cleanup
 1. Archive daily logs older than 30 days

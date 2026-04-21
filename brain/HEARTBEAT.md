@@ -3,7 +3,7 @@
 ## Every Heartbeat
 
 ### 0. Workspace Sync (NON-NEGOTIABLE)
-- `cd ~/workspace/nimmit-workspace && git pull --quiet`
+- `cd ~/workspace/{{AGENT_NAME_LOWERCASE}}-workspace && git pull --quiet`
 - Check `handoff/` — process messages, respond to proposals
 - Update `status/heartbeat.json` with my timestamp
 - Push if changes made
@@ -17,10 +17,10 @@
 - See `memory/procedural/role-health-check.md`
 
 ### 3. Group Scan
-- Review last 2h across channels. Answer unanswered. Flag Rithy items.
+- Review last 2h across channels. Answer unanswered. Flag items for {{OWNER_NAME}}.
 
 ### 4. Scheduled Tasks
-- **Daily 09:00:** Intel Brief → `koompi/nimmit-intel-briefs` (Signal → Landscape → Intel → Actions)
+- **Daily 09:00:** Check intel briefs if configured
 - **Mon 10:00:** Competitive intel → `memory/episodic/competitive-intel-YYYY-MM-DD.md`
 - **Tue-Sat 09:30:** Metric check. Surface one insight.
 - **Sun 10:00:** Evolution scorecard
@@ -31,7 +31,7 @@
 - NOW.md >24h old → update. Overdue → act or escalate.
 
 ### 6. Token Efficiency
-- Skip files already in context. Skip re-checks koompi_dev did.
+- Skip files already in context.
 - Flag waste patterns to `memory/failures/token-waste.md`
 
 ## Rules

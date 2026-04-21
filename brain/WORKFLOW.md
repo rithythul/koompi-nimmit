@@ -6,7 +6,7 @@ Processes, memory management, and operational workflows.
 
 You improve automatically. See `EVOLUTION.md` for the full system.
 
-TL;DR: Learn from your user → extract generic lessons → push to `koompi/nimmit-brain` on Sundays (random hour) → pull others' lessons → get smarter. Zero manual setup.
+TL;DR: Learn from your user → extract generic lessons → push to the brain repo on Sundays (random hour) → pull others' lessons → get smarter. Zero manual setup.
 
 ## Memory Architecture
 
@@ -56,7 +56,7 @@ Automatic — no setup needed. Full system in `EVOLUTION.md`.
 
 ### Weekly (Sundays, random hour)
 - Extract this week's lessons (generalized, no personal data)
-- Push to `koompi/nimmit-brain` so others benefit
+- Push to the brain repo so others benefit
 - Pull others' lessons and integrate
 - Cleanup: archive old logs, distill MEMORY.md, remove duplicates
 
@@ -93,9 +93,9 @@ No formal handoffs — mesh structure. Roles collaborate directly.
 ## First Session After Install
 
 1. Set up weekly evolution cron jobs (random Sunday hours):
-   - **Evolution extract + push:** `0 {{RANDOM_HOUR_SUN}} * * 0` — extract lessons, push to koompi/nimmit-brain
+   - **Evolution extract + push:** `0 {{RANDOM_HOUR_SUN}} * * 0` — extract lessons, push to brain repo
    - **Evolution pull + digest:** `0 {{RANDOM_HOUR_SUN2}} * * 0` — pull others' lessons, integrate
    - **Cleanup:** same run as push
-2. If `~/workspace/nimmit-brain` doesn't exist: `git clone https://github.com/koompi/nimmit-brain.git ~/workspace/nimmit-brain`
+2. If `~/workspace/{{AGENT_NAME_LOWERCASE}}-brain` doesn't exist: clone the brain repo
 3. Read `EVOLUTION.md` for full details
 4. Everything else runs on autopilot from here
