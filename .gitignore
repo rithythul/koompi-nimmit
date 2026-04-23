@@ -5,3 +5,28 @@ node_modules/
 *.log
 .DS_Store
 supabase/.temp/
+
+# Never ship real brain data
+brain/memory/daily/*
+brain/memory/episodic/*
+brain/memory/failures/*
+brain/memory/outcomes/*
+brain/memory/research/*
+brain/memory/working/*
+brain/memory/decisions/*
+!brain/memory/**/.gitkeep
+!brain/memory/**/README.md
+
+# Never ship secrets
+*.pem
+*.key
+credentials.json
+secrets/
+openclaw.json
+.openclaw/
+claude/
+
+# Temp/state
+state.json
+*.tmp
+tmp/
