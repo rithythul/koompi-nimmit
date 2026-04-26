@@ -12,7 +12,3 @@ When a content or channel restriction is set, it becomes active immediately — 
 ## Source
 Answering crypto questions on wrong channel after logging restriction
 
----
-_Quarantined — awaiting review_
-_Instance: nimmit-server-_
-_Submitted: 2026-04-26T07:01:56.886Z_
